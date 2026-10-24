@@ -1,0 +1,14 @@
+.dashboard-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+.stat-card { padding: 20px; }
+.stat-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.stat-card__top p { margin: 0; color: #64748b; font-size: 14px; font-weight: 500; }
+.stat-card__icon { display: grid; width: 40px; height: 40px; flex: 0 0 auto; place-items: center; border-radius: 12px; font-size: 18px; }
+.stat-card__icon--0 { color: #4f46e5; background: #eef2ff; }
+.stat-card__icon--1 { color: #059669; background: #ecfdf5; }
+.stat-card__icon--2 { color: #d97706; background: #fffbeb; }
+.stat-card__icon--3 { color: #0284c7; background: #f0f9ff; }
+.stat-card__value { margin: 20px 0 0; color: #0f172a; font-size: 30px; font-weight: 700; letter-spacing: -.03em; }
+.stat-card__note { margin: 4px 0 0; color: #94a3b8; font-size: 12px; }
+.dashboard-recent { overflow: hidden; }
+@media (max-width: 1100px) { .dashboard-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .dashboard-stats { gap: 10px; } .stat-card { padding: 15px; } .stat-card__value { font-size: 26px; } }

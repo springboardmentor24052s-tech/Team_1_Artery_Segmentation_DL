@@ -1,0 +1,7 @@
+.results-card { padding: 24px; }
+.results-label { display: inline-flex; padding: 6px 12px; border-radius: 999px; color: #b45309; background: #fffbeb; font-size: 12px; font-weight: 600; }
+.results-card h2 { margin: 24px 0 12px; color: #1e293b; font-size: 16px; }
+.results-placeholder { display: grid; height: 288px; place-items: center; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc; }
+.results-placeholder p, .results-note { color: #94a3b8; font-size: 14px; }
+.results-note { margin: 16px 0 0; color: #64748b; }
+@media (max-width: 600px) { .results-card { padding: 18px; } .results-placeholder { height: 240px; } }

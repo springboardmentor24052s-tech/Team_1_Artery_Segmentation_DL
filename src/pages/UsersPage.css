@@ -1,0 +1,7 @@
+.users-card { overflow: hidden; }
+.users-card__header { padding: 20px 24px; border-bottom: 1px solid #f1f5f9; }
+.users-card__header h2 { margin: 0; color: #1e293b; font-size: 16px; font-weight: 600; }
+.users-card__header p { margin: 4px 0 0; color: #64748b; font-size: 14px; }
+.user-name-cell { color: #1e293b !important; font-weight: 500; }
+.user-active { display: inline-block; padding: 4px 10px; border-radius: 999px; color: #047857; background: #ecfdf5; font-size: 12px; font-weight: 600; }
+.users-card__note { margin: 0; padding: 16px 24px; color: #94a3b8; font-size: 12px; }

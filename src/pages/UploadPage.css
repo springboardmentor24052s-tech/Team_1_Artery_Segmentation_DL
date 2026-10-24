@@ -1,0 +1,36 @@
+.local-demo-badge { padding: 6px 12px; border-radius: 999px; color: #4338ca; background: #eef2ff; font-size: 12px; font-weight: 600; }
+.upload-info-card { margin-bottom: 20px; padding: 24px; }
+.upload-info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.upload-description-field { margin-top: 16px; }
+.upload-file-card { padding: 24px; }
+.upload-file-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.upload-file-heading h2 { margin: 0; color: #1e293b; font-size: 16px; font-weight: 600; }
+.upload-file-heading p { margin: 4px 0 0; color: #64748b; font-size: 14px; }
+.upload-file-heading > span { flex: 0 0 auto; padding: 6px 12px; border-radius: 999px; color: #64748b; background: #f1f5f9; font-size: 12px; font-weight: 600; }
+.upload-dropzone { display: flex; min-height: 192px; flex-direction: column; align-items: center; justify-content: center; padding: 20px; border: 1px dashed #cbd5e1; border-radius: 16px; background: #f8fafc; text-align: center; cursor: pointer; transition: border-color 150ms ease, background-color 150ms ease; }
+.upload-dropzone:hover, .upload-dropzone--active { border-color: #818cf8; background: #eef2ff; }
+.upload-dropzone__icon { display: grid; width: 48px; height: 48px; margin-bottom: 12px; place-items: center; border-radius: 16px; color: #4338ca; background: #e0e7ff; font-size: 26px; font-weight: 300; }
+.upload-dropzone__title { color: #1e293b; font-size: 14px; font-weight: 600; }
+.upload-dropzone__browse { margin-top: 4px; color: #64748b; font-size: 14px; }
+.upload-dropzone__browse strong { color: #4f46e5; }
+.upload-dropzone__note { margin-top: 12px; color: #94a3b8; font-size: 12px; }
+.upload-file-summary { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; }
+.upload-file-summary__icon { display: grid; width: 40px; height: 40px; flex: 0 0 auto; place-items: center; border-radius: 12px; color: #4338ca; background: #eef2ff; font-size: 12px; font-weight: 700; }
+.upload-file-summary > div { min-width: 0; flex: 1; }
+.upload-file-summary p { overflow: hidden; margin: 0; color: #1e293b; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.upload-file-summary small { display: block; margin-top: 3px; color: #64748b; font-size: 12px; }
+.upload-previews { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
+.upload-preview > p { margin: 0 0 8px; color: #334155; font-size: 14px; font-weight: 600; }
+.upload-preview__frame { display: grid; height: 224px; overflow: hidden; place-items: center; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc; }
+.upload-preview__frame img { width: 100%; height: 100%; object-fit: contain; }
+.upload-preview__frame span { padding: 20px; color: #94a3b8; text-align: center; font-size: 14px; }
+.upload-preview > small { display: block; margin-top: 8px; color: #94a3b8; font-size: 12px; }
+.upload-options-title { margin: 28px 0 16px; color: #1e293b; font-size: 16px; font-weight: 600; }
+.upload-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.upload-toggle { display: flex; min-height: 44px; align-items: center; gap: 12px; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 12px; color: #475569; font-size: 14px; }
+.upload-toggle input { width: 16px; height: 16px; flex: 0 0 auto; accent-color: #4f46e5; }
+.upload-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #f1f5f9; }
+.upload-footnote { margin: 16px 0 0; color: #94a3b8; font-size: 12px; line-height: 1.6; }
+@media (max-width: 900px) { .upload-options { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .upload-info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .upload-info-card, .upload-file-card { padding: 18px; } .upload-previews { grid-template-columns: 1fr; } .upload-options { grid-template-columns: 1fr; } .upload-actions { justify-content: stretch; } .upload-actions .button { flex: 1; } }
