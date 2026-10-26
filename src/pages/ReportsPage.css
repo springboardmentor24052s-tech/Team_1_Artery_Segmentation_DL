@@ -1,0 +1,14 @@
+.reports-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+.report-stat { display: grid; gap: 16px; padding: 20px; }
+.report-stat span { color: #64748b; font-size: 13px; }
+.report-stat strong { color: #0f172a; font-size: 28px; }
+.reports-table-card { overflow: hidden; }
+.reports-table-heading { padding: 20px 24px; }
+.reports-table-heading h2 { margin: 0; color: #1e293b; font-size: 16px; }
+.reports-table-heading p, .reports-export p, .reports-note { margin: 5px 0 0; color: #64748b; font-size: 13px; line-height: 1.5; }
+.reports-export { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; border-top: 1px solid #f1f5f9; }
+.reports-export p { margin: 0; }
+.reports-export .button { flex: 0 0 auto; }
+.reports-note { margin-top: 16px; color: #94a3b8; }
+@media (max-width: 900px) { .reports-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .reports-stats { gap: 10px; } .report-stat { padding: 15px; } .reports-export { align-items: stretch; flex-direction: column; padding: 16px 18px; } .reports-table-heading { padding: 18px; } }

@@ -1,7 +1,15 @@
 .users-card { overflow: hidden; }
+.users-add-card { margin-bottom: 20px; padding: 20px 24px; }
+.users-add-card h2 { margin: 0 0 16px; color: #1e293b; font-size: 16px; }
+.users-add-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; align-items: end; gap: 16px; }
 .users-card__header { padding: 20px 24px; border-bottom: 1px solid #f1f5f9; }
 .users-card__header h2 { margin: 0; color: #1e293b; font-size: 16px; font-weight: 600; }
 .users-card__header p { margin: 4px 0 0; color: #64748b; font-size: 14px; }
 .user-name-cell { color: #1e293b !important; font-weight: 500; }
-.user-active { display: inline-block; padding: 4px 10px; border-radius: 999px; color: #047857; background: #ecfdf5; font-size: 12px; font-weight: 600; }
+.user-role-select { min-height: 34px; padding: 5px 8px; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569; background: #fff; }
+.user-status { padding: 4px 10px; border: 0; border-radius: 999px; color: #047857; background: #ecfdf5; font-size: 12px; font-weight: 600; cursor: pointer; }
+.user-status--inactive { color: #64748b; background: #f1f5f9; }
+.users-message { margin: 12px 24px 0; }
 .users-card__note { margin: 0; padding: 16px 24px; color: #94a3b8; font-size: 12px; }
+@media (max-width: 900px) { .users-add-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .users-add-card { padding: 18px; } .users-add-form { grid-template-columns: 1fr; } .users-message { margin-right: 18px; margin-left: 18px; } }

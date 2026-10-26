@@ -3,7 +3,11 @@ import AppLayout from "./components/AppLayout.jsx";
 import { DEMO_CASES, readSavedCases, STORAGE_KEY } from "./data/cases.js";
 import { pageFromPath } from "./data/navigation.js";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import CaseManagementPage from "./pages/CaseManagementPage.jsx";
+import CaseDetailsPage from "./pages/CaseDetailsPage.jsx";
+import AnalysisConfigurationPage from "./pages/AnalysisConfigurationPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import ReportsPage from "./pages/ReportsPage.jsx";
 import ResultsPage from "./pages/ResultsPage.jsx";
 import UploadPage from "./pages/UploadPage.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
@@ -40,12 +44,28 @@ function App() {
     return "";
   }
 
+  function removeLocalCase(code) {
+    const updated = localCases.filter((item) => item.code !== code);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch (error) {
+      console.error("Could not update saved StenoVision cases.", error);
+      return "Could not update browser storage. Check available storage and try again.";
+    }
+    setLocalCases(updated);
+    return "";
+  }
+
   if (page === "login") return <LoginPage navigate={navigate} />;
 
   const content = {
     dashboard: <DashboardPage cases={cases} navigate={navigate} />,
+    "case-management": <CaseManagementPage cases={cases} onRemove={removeLocalCase} navigate={navigate} />,
     upload: <UploadPage cases={cases} onSave={saveCase} />,
-    results: <ResultsPage navigate={navigate} />,
+    "analysis-configuration": <AnalysisConfigurationPage cases={cases} navigate={navigate} />,
+    results: <ResultsPage cases={cases} navigate={navigate} />,
+    "case-details": <CaseDetailsPage cases={cases} navigate={navigate} />,
+    reports: <ReportsPage cases={cases} />,
     users: <UsersPage />,
   }[page] || <DashboardPage cases={cases} navigate={navigate} />;
 

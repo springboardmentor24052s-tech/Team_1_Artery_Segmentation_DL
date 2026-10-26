@@ -13,7 +13,7 @@ export default function AppLayout({ page, navigate, mobileNavOpen, setMobileNavO
     <div className="app-content">
       <header className="topbar">
         <div className="topbar__left"><button aria-label="Open navigation" className="menu-button" onClick={() => setMobileNavOpen(true)}>☰</button><span className="topbar__desktop-label">Student research prototype</span><span className="topbar__mobile-label">StenoVision</span></div>
-        <button className="profile-button" onClick={() => window.alert("Profile is a placeholder; authentication is not connected.")}><span className="profile-avatar">SV</span><span className="profile-copy"><span>Workspace user</span><small>Research account</small></span><span className="profile-chevron">⌄</span></button>
+        <button aria-label="Sign out of demo" className="profile-button" onClick={() => navigate("login")}><span className="profile-avatar">SV</span><span className="profile-copy"><span>Workspace user</span><small>Sign out</small></span><span className="profile-chevron">⌄</span></button>
       </header>
       <main className="main-content">{children}</main>
       <footer className="app-footer"><span>StenoVision · Student research prototype</span></footer>

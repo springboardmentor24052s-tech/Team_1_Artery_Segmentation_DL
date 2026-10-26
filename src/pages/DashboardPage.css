@@ -1,3 +1,4 @@
+.dashboard-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .dashboard-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
 .stat-card { padding: 20px; }
 .stat-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }

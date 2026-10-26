@@ -1,0 +1,12 @@
+.analysis-configuration-card { padding: 24px; }
+.analysis-configuration-card > .field { max-width: 480px; }
+.analysis-configuration-card form h2 { margin: 28px 0 6px; color: #1e293b; font-size: 16px; }
+.configuration-intro { margin: 0; color: #64748b; font-size: 14px; line-height: 1.6; }
+.configuration-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+.configuration-toggle { display: flex; min-height: 44px; align-items: center; gap: 12px; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 12px; color: #475569; font-size: 14px; }
+.configuration-toggle input { width: 16px; height: 16px; accent-color: #4f46e5; }
+.configuration-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #f1f5f9; }
+.configuration-empty { display: grid; justify-items: start; gap: 12px; padding: 24px 0; }
+.configuration-empty p { margin: 0; color: #64748b; }
+.configuration-note { margin: 18px 0 0; color: #94a3b8; font-size: 12px; }
+@media (max-width: 600px) { .analysis-configuration-card { padding: 18px; } .configuration-options { grid-template-columns: 1fr; } .configuration-actions { justify-content: stretch; } .configuration-actions .button { flex: 1; } }

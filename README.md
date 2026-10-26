@@ -1,6 +1,6 @@
 # StenoVision
 
-React frontend for the StenoVision medical imaging research prototype, styled with regular CSS.
+StenoVision is a responsive React frontend for an artery-imaging research prototype. It runs in the browser and does not require a backend.
 
 ## Run the frontend
 
@@ -9,16 +9,20 @@ npm install
 npm run dev
 ```
 
-To create a production build:
+Create a production build with `npm run build`. Vite writes generated output to `dist/`; use `npm run preview` to serve that build locally. The generated `dist/` directory is not required for development and can be recreated at any time.
 
-```powershell
-npm run build
-```
+## Pages and features
 
-## Screens
+- **Login:** demo-only form; valid email and a password with at least four characters opens the workspace. No credentials are authenticated or stored.
+- **Dashboard:** case counts, recent cases, and shortcuts to case management and upload.
+- **Case Management:** search and filter cases, open case details, and remove browser-local case metadata. Sample cases are read-only.
+- **Image Upload:** accepts PNG, JPG/JPEG, WEBP, and BMP images up to 15 MB; includes validation, previews, browser-side grayscale conversion, intensity normalization, and resizing. Case metadata is saved to browser local storage. Image files and previews are not retained after leaving the page.
+- **Analysis Configuration:** save browser-local preprocessing preferences per case. Settings do not run model inference.
+- **Analysis Results:** shows case metadata; segmentation results and metrics are unavailable because no model or backend is connected.
+- **Case Details:** displays metadata and research notes for the selected case.
+- **Reports:** summarizes case metadata and downloads a CSV export. The export does not contain image files or model results.
+- **User Management:** manage demo users in browser local storage. This does not create real accounts.
 
-The app currently includes five screens: Login, Dashboard, Image Upload, Analysis Results, and User Management. Other screens have been removed for now.
+The app makes no backend requests. DICOM/NIfTI files are not supported. There is no Python preprocessing directory or script in this project.
 
-Image Upload supports image selection, validation, preview, browser-side preprocessing, and saving case metadata in browser local storage. Uploaded image files and previews are not retained after leaving the Upload page. Analysis Results is a placeholder until model inference is connected. Login and User Management are UI demonstrations; there is no authentication or backend connection.
-
-Supported browser images: PNG, JPG/JPEG, WEBP, BMP. Maximum 15 MB. DICOM/NIfTI are not supported. This prototype is not a medical diagnostic tool; use public or de-identified research data and follow dataset terms.
+Use public or de-identified research data, follow dataset terms, and do not enter patient-identifying information. This prototype is not a medical diagnostic tool.

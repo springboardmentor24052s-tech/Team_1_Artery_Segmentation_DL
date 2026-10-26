@@ -1,0 +1,7 @@
+.case-management-card { overflow: hidden; }
+.case-management-filters { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(180px, .5fr); gap: 16px; padding: 20px 24px; }
+.case-management-actions { white-space: nowrap; }
+.case-management-actions .button + .button { margin-left: 6px; }
+.case-management-message { margin: 0 24px 16px; }
+.case-management-note { margin: 0; padding: 16px 24px; color: #94a3b8; font-size: 12px; line-height: 1.5; }
+@media (max-width: 600px) { .case-management-filters { grid-template-columns: 1fr; padding: 18px; } .case-management-note { padding: 16px 18px; } .case-management-message { margin-right: 18px; margin-left: 18px; } }

@@ -102,12 +102,12 @@ export default function UploadPage({ cases, onSave }) {
     const normalizedCode = code.trim();
     if (!file) { setError("Choose an image before saving the case."); return; }
     if (!normalizedCode) { setError("Enter a case code first."); return; }
-    if (cases.some((item) => item.code.toLowerCase() === normalizedCode.toLowerCase())) { setError("That case code already exists."); return; }
+    if (cases.some((item) => typeof item.code === "string" && item.code.toLowerCase() === normalizedCode.toLowerCase())) { setError("That case code already exists."); return; }
     const result = onSave({
       code: normalizedCode,
       modality,
       date: studyDate || new Date().toISOString().slice(0, 10),
-      status: processedUrl ? "Processing" : "New",
+      status: "New",
       fileName: file.name,
       description,
     });
