@@ -1,0 +1,30 @@
+{
+  "task": "Milestone 3 Task 4: Stenosis Localization & Branch Mapping",
+  "method": "Non-Maximum Suppression (NMS) Fusion with Anatomical Territory Mapping",
+  "nms_iou_threshold": 0.25,
+  "confidence_threshold": 0.50,
+  "sample_evaluations": [
+    {
+      "image_id": "10.png",
+      "patient_id": "PT-1008",
+      "raw_proposals": 7,
+      "deduplicated_lesions": 1,
+      "findings": [
+        {
+          "lesion_id": 1,
+          "bbox": [180, 240, 260, 310],
+          "centroid": [220, 275],
+          "detection_confidence": 0.942,
+          "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+          "segment_code": "LAD_MID",
+          "anatomical_features": {
+            "proximity_to_diagonal_1": "5.2 mm proximal",
+            "vessel_tortuosity_index": 1.18,
+            "bifurcation_involvement": false
+          }
+        }
+      ]
+    }
+  ]
+}
+
