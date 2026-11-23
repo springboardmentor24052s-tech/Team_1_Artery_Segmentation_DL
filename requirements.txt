@@ -1,0 +1,49 @@
+# ==============================================================================
+# StenoVision - Core Dependencies & Environment Specification
+# ==============================================================================
+
+# Web Framework & Microservices API
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+python-multipart>=0.0.9
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+email-validator>=2.1.0
+
+# Database Persistence & ORM
+sqlalchemy>=2.0.0
+psycopg[binary]>=3.1.0
+psycopg2-binary>=2.9.9
+alembic>=1.13.0
+
+# Security, Identity & JWT Authentication
+passlib[bcrypt]>=1.7.4
+bcrypt==4.0.1
+PyJWT>=2.8.0
+python-dotenv>=1.0.0
+
+# Deep Learning Framework & Mathematical Utilities
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+scipy>=1.10.0
+opencv-python-headless>=4.8.0
+Pillow>=10.0.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+
+# Clinical Medical Imaging Formats (DICOM & 3D CCTA NIfTI)
+nibabel>=5.1.0
+pydicom>=2.4.0
+
+# Clinical Automated PDF Reporting
+reportlab>=4.0.0
+
+# Observability, Prometheus Metrics & Health Monitoring
+prometheus-client>=0.20.0
+
+# Quality Assurance, Automated Unit & Performance Testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+httpx>=0.27.0
+playwright>=1.40.0
