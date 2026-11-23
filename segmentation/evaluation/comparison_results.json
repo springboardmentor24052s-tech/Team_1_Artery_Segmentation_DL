@@ -1,0 +1,29 @@
+{
+  "dataset": "ARCADE SYNTAX Test Split",
+  "num_test_images": 300,
+  "models": {
+    "UNet": {
+      "dice_mean": 0.6821557907079545,
+      "dice_std": 0.13521016326738478,
+      "iou_mean": 0.5325080521415408,
+      "iou_std": 0.14669193320879548,
+      "precision_mean": 0.7324878467084258,
+      "recall_mean": 0.661372470791391,
+      "specificity_mean": 0.9904715854488254,
+      "latency_mean_ms": 26.614798328761633,
+      "fps": 37.57308199924764
+    },
+    "AttentionUNet": {
+      "dice_mean": 0.6833064228596125,
+      "dice_std": 0.1434917400541643,
+      "iou_mean": 0.5355627239587273,
+      "iou_std": 0.1543782005727024,
+      "precision_mean": 0.7340459651571458,
+      "recall_mean": 0.6641884723535135,
+      "specificity_mean": 0.99087343508095,
+      "latency_mean_ms": 29.463090998663876,
+      "fps": 33.94077016716776
+    }
+  },
+  "superior_model": "AttentionUNet"
+}
