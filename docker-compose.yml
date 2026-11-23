@@ -1,0 +1,175 @@
+version: "3.8"
+
+# ==============================================================================
+# StenoVision - Multi-Container Production Deployment Specification
+# Milestone 4: Dockerization, Monitoring, Logging & Gateway Orchestration
+# ==============================================================================
+
+services:
+  # 1. Reverse Proxy Gateway: Nginx
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: stenovision_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - stenovision_network
+
+  # 2. Primary Relational Database: PostgreSQL 15 Alpine
+  postgres:
+    image: postgres:15-alpine
+    container_name: stenovision_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stenovision_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docs/architecture/postgres_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d stenovision_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - stenovision_network
+
+  # 3. Deep Learning & Reporting REST Microservice: FastAPI
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: stenovision_backend
+    restart: unless-stopped
+    environment:
+      PROJECT_NAME: "StenoVision Artery Analysis Engine"
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/stenovision_db
+      SECRET_KEY: stenovision-secret-key-production-milestone4-2026
+      STORAGE_ROOT: /app/storage
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - backend_storage:/app/storage
+      - backend_logs:/app/logs
+      - ./backend/static:/app/static
+      - ./stenosis:/app/stenosis:ro
+      - ./segmentation:/app/segmentation:ro
+      - ./preprocessing:/app/preprocessing:ro
+      - ./milestone_2_results:/app/milestone_2_results:ro
+      - ./milestone_3_results:/app/milestone_3_results:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - stenovision_network
+
+  # 4. Clinical Web Workstation: Next.js 15 / React 19
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: stenovision_frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000/ || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+    networks:
+      - stenovision_network
+
+  # 5. Metrics Collection & Aggregation: Prometheus
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: stenovision_prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:9090/-/healthy || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - stenovision_network
+
+  # 6. Observability & Clinical Dashboards: Grafana
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: stenovision_grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: stenovision_admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - stenovision_network
+
+networks:
+  stenovision_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  backend_storage:
+    driver: local
+  backend_logs:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
