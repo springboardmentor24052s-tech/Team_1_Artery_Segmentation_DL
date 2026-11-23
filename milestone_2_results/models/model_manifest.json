@@ -1,0 +1,89 @@
+{
+  "milestone": "Milestone 2: Artery Segmentation & Vessel Analysis",
+  "created_at": "2026-11-05",
+  "status": "COMPLETED & FROZEN",
+  "models": {
+    "AttentionUNet": {
+      "role": "Selected Best-Performing Architecture",
+      "filename": "best_attention_unet.pth",
+      "size_bytes": 23742891,
+      "sha256": "cddb87821c60139836b4ebc1c7255d90fa8d985a5ab5b75d4ca1c7bdf5d64ec1",
+      "total_parameters": 1964657,
+      "input_shape": [
+        1,
+        1,
+        512,
+        512
+      ],
+      "output_shape": [
+        1,
+        1,
+        512,
+        512
+      ],
+      "validation_dice": 0.7354,
+      "test_metrics": {
+        "dice_mean": 0.6833064228596125,
+        "dice_std": 0.1434917400541643,
+        "iou_mean": 0.5355627239587273,
+        "iou_std": 0.1543782005727024,
+        "precision_mean": 0.7340459651571458,
+        "recall_mean": 0.6641884723535135,
+        "specificity_mean": 0.99087343508095,
+        "latency_mean_ms": 29.463090998663876,
+        "fps": 33.94077016716776
+      }
+    },
+    "UNet": {
+      "role": "Baseline Segmentation Architecture",
+      "filename": "best_unet.pth",
+      "size_bytes": 23414155,
+      "sha256": "f21e4488049d924a2f9fb9e4331e43ac09dbb5f24df2c9afdba94a30774417d6",
+      "total_parameters": 1942289,
+      "input_shape": [
+        1,
+        1,
+        512,
+        512
+      ],
+      "output_shape": [
+        1,
+        1,
+        512,
+        512
+      ],
+      "validation_dice": 0.7347,
+      "test_metrics": {
+        "dice_mean": 0.6821557907079545,
+        "dice_std": 0.13521016326738478,
+        "iou_mean": 0.5325080521415408,
+        "iou_std": 0.14669193320879548,
+        "precision_mean": 0.7324878467084258,
+        "recall_mean": 0.661372470791391,
+        "specificity_mean": 0.9904715854488254,
+        "latency_mean_ms": 26.614798328761633,
+        "fps": 37.57308199924764
+      }
+    },
+    "best_attention_unet_traced": {
+      "filename": "best_attention_unet_traced.pt",
+      "architecture": "AttentionUNet (TorchScript Traced)",
+      "format": "TorchScript / JIT Compiled",
+      "input_shape": [
+        1,
+        1,
+        512,
+        512
+      ],
+      "output_shape": [
+        1,
+        1,
+        512,
+        512
+      ],
+      "file_size_bytes": 8126462,
+      "sha256": "0342371373fa7eadc0f8ab1e5d9a5e5251e94bbbf04353f92fe7028066446980",
+      "dependency_requirements": "PyTorch C++ / LibTorch or standard torch without Python model source code definition"
+    }
+  }
+}
