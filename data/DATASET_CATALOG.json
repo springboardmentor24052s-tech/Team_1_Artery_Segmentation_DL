@@ -1,0 +1,98 @@
+{
+  "catalog_version": "2.1.0",
+  "project_title": "StenoVision - Cardiovascular AI & Decision Support System",
+  "organization": "Infosys Springboard Virtual Internship 7.0 (Healthcare AI Track)",
+  "author": "Sathiyamoorthi K (Lead AI Developer)",
+  "last_updated": "2026-11-17",
+  "modalities": {
+    "2D_XCA": {
+      "modality_name": "2D X-Ray Coronary Angiography (XCA)",
+      "clinical_domain": "Fluoroscopic Cine-Angiography (Interventional Catheterization Laboratory)",
+      "benchmark_source": "MICCAI 2023 ARCADE Challenge",
+      "frame_dimensions": [512, 512],
+      "color_depth": "8-bit Grayscale",
+      "acquisition_equipment": ["Philips Azurion 3", "Siemens Artis Zee"],
+      "total_evaluations": 3000,
+      "unique_patient_frames": 1500,
+      "partition_split_ratio": "66.7% Train / 13.3% Val / 20.0% Test",
+      "tasks": {
+        "task_1_stenosis_detection": {
+          "directory": "stenosis",
+          "annotation_format": "MS-COCO Detection JSON (Bounding Boxes & Plaque Masks)",
+          "classes": ["background", "stenosis"],
+          "splits": {
+            "train": { "images": 1000, "annotations": 1625, "annotation_file": "stenosis/train/annotations/train.json" },
+            "val":   { "images": 200,  "annotations": 406,  "annotation_file": "stenosis/val/annotations/val.json" },
+            "test":  { "images": 300,  "annotations": 386,  "annotation_file": "stenosis/test/annotations/test.json" }
+          },
+          "total_annotated_plaques": 2417
+        },
+        "task_2_syntax_artery_segmentation": {
+          "directory": "syntax",
+          "annotation_format": "MS-COCO Polygon Format (25 AHA/SYNTAX Vessel Classes)",
+          "splits": {
+            "train": { "images": 1000, "annotations": 4976, "annotation_file": "syntax/train/annotations/train.json" },
+            "val":   { "images": 200,  "annotations": 1168, "annotation_file": "syntax/val/annotations/val.json" },
+            "test":  { "images": 300,  "annotations": 1672, "annotation_file": "syntax/test/annotations/test.json" }
+          },
+          "total_vessel_segments": 7816
+        },
+        "rasterized_binary_masks": {
+          "directory": "masks",
+          "format": "Single-channel 8-bit PNG (0=Background, 255=Lumen)",
+          "splits": {
+            "train": { "mask_count": 1000, "manifest_file": "masks/train_manifest.json" },
+            "val":   { "mask_count": 200,  "manifest_file": "masks/val_manifest.json" },
+            "test":  { "mask_count": 300,  "manifest_file": "masks/test_manifest.json" }
+          },
+          "total_rasterized_masks": 1500
+        }
+      }
+    },
+    "3D_CCTA": {
+      "modality_name": "3D Computed Tomography Angiography (CCTA/CTPA)",
+      "clinical_domain": "Non-Invasive Diagnostic Multi-Detector Helical CT (Outpatient / Triage)",
+      "benchmark_source": "MICCAI PARSE 2022 Pulmonary & Coronary Arterial Challenge",
+      "format": "NIfTI Volumetric Compressed (.nii.gz)",
+      "volume_matrix": "512 x 512 x Z (Z = 180 to 350 axial slices)",
+      "voxel_resolution_mm": "0.65 - 0.78 x 0.65 - 0.78 x 1.00 mm (Sub-millimeter in-plane)",
+      "hounsfield_unit_scale": [-1024.0, 3071.0],
+      "recommended_windowing_hu": [-100.0, 600.0],
+      "total_patients": 100,
+      "total_axial_slices": 30340,
+      "partition_split_ratio": "70% Train / 15% Val / 15% Test",
+      "splits": {
+        "train": {
+          "patient_count": 70,
+          "total_axial_slices": 20571,
+          "mean_slices_per_patient": 293.9,
+          "manifest_file": "3d_ccta/train_manifest.json",
+          "directory": "3d_ccta/train"
+        },
+        "val": {
+          "patient_count": 15,
+          "total_axial_slices": 4627,
+          "mean_slices_per_patient": 308.5,
+          "manifest_file": "3d_ccta/val_manifest.json",
+          "directory": "3d_ccta/val"
+        },
+        "test": {
+          "patient_count": 15,
+          "total_axial_slices": 5142,
+          "mean_slices_per_patient": 342.8,
+          "manifest_file": "3d_ccta/test_manifest.json",
+          "directory": "3d_ccta/test"
+        }
+      },
+      "dual_volume_architecture": {
+        "image": "Primary contrast-enhanced CT angiography scan (PAxxxxxx.nii.gz)",
+        "label": "Ground-truth 3D vascular lumen segmentation mask (PAxxxxxx.nii.gz)"
+      }
+    }
+  },
+  "clinical_standards": {
+    "stenosis_grading": "ACC/AHA 5-Tier Classification (Normal <25%, Mild 25-49%, Moderate 50-69%, Severe 70-89%, Critical >=90%)",
+    "anatomical_taxonomy": "AHA 16-Segment Coronary Tree / SYNTAX Methodology",
+    "privacy_compliance": "HIPAA Safe Harbor De-Identification (All PHI, Catheterization Lab IDs, and Hospital Timestamps Scrubbed)"
+  }
+}

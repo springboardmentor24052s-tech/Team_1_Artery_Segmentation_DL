@@ -1,0 +1,317 @@
+[
+  {
+    "patient_id": "PA000237",
+    "split": "val",
+    "image_file": "PA000237.nii.gz",
+    "label_file": "PA000237.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000237/image/PA000237.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000237/label/PA000237.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      325
+    ],
+    "total_slices": 325,
+    "selected_slice_idx": 201,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000238",
+    "split": "val",
+    "image_file": "PA000238.nii.gz",
+    "label_file": "PA000238.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000238/image/PA000238.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000238/label/PA000238.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      304
+    ],
+    "total_slices": 304,
+    "selected_slice_idx": 208,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000239",
+    "split": "val",
+    "image_file": "PA000239.nii.gz",
+    "label_file": "PA000239.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000239/image/PA000239.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000239/label/PA000239.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      329
+    ],
+    "total_slices": 329,
+    "selected_slice_idx": 206,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000242",
+    "split": "val",
+    "image_file": "PA000242.nii.gz",
+    "label_file": "PA000242.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000242/image/PA000242.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000242/label/PA000242.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      325
+    ],
+    "total_slices": 325,
+    "selected_slice_idx": 196,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000245",
+    "split": "val",
+    "image_file": "PA000245.nii.gz",
+    "label_file": "PA000245.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000245/image/PA000245.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000245/label/PA000245.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      323
+    ],
+    "total_slices": 323,
+    "selected_slice_idx": 195,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000247",
+    "split": "val",
+    "image_file": "PA000247.nii.gz",
+    "label_file": "PA000247.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000247/image/PA000247.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000247/label/PA000247.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      262
+    ],
+    "total_slices": 262,
+    "selected_slice_idx": 150,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000255",
+    "split": "val",
+    "image_file": "PA000255.nii.gz",
+    "label_file": "PA000255.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000255/image/PA000255.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000255/label/PA000255.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      327
+    ],
+    "total_slices": 327,
+    "selected_slice_idx": 194,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000261",
+    "split": "val",
+    "image_file": "PA000261.nii.gz",
+    "label_file": "PA000261.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000261/image/PA000261.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000261/label/PA000261.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      312
+    ],
+    "total_slices": 312,
+    "selected_slice_idx": 169,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000263",
+    "split": "val",
+    "image_file": "PA000263.nii.gz",
+    "label_file": "PA000263.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000263/image/PA000263.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000263/label/PA000263.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      280
+    ],
+    "total_slices": 280,
+    "selected_slice_idx": 171,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000273",
+    "split": "val",
+    "image_file": "PA000273.nii.gz",
+    "label_file": "PA000273.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000273/image/PA000273.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000273/label/PA000273.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      302
+    ],
+    "total_slices": 302,
+    "selected_slice_idx": 193,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000282",
+    "split": "val",
+    "image_file": "PA000282.nii.gz",
+    "label_file": "PA000282.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000282/image/PA000282.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000282/label/PA000282.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      300
+    ],
+    "total_slices": 300,
+    "selected_slice_idx": 188,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000284",
+    "split": "val",
+    "image_file": "PA000284.nii.gz",
+    "label_file": "PA000284.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000284/image/PA000284.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000284/label/PA000284.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      321
+    ],
+    "total_slices": 321,
+    "selected_slice_idx": 196,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000285",
+    "split": "val",
+    "image_file": "PA000285.nii.gz",
+    "label_file": "PA000285.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000285/image/PA000285.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000285/label/PA000285.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      299
+    ],
+    "total_slices": 299,
+    "selected_slice_idx": 187,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000286",
+    "split": "val",
+    "image_file": "PA000286.nii.gz",
+    "label_file": "PA000286.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000286/image/PA000286.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000286/label/PA000286.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      295
+    ],
+    "total_slices": 295,
+    "selected_slice_idx": 199,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  },
+  {
+    "patient_id": "PA000292",
+    "split": "val",
+    "image_file": "PA000292.nii.gz",
+    "label_file": "PA000292.nii.gz",
+    "relative_image_path": "3d_ccta/val/PA000292/image/PA000292.nii.gz",
+    "relative_label_path": "3d_ccta/val/PA000292/label/PA000292.nii.gz",
+    "volume_shape": [
+      512,
+      512,
+      323
+    ],
+    "total_slices": 323,
+    "selected_slice_idx": 202,
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ],
+    "data_dtype": "int16",
+    "has_companion_label": true
+  }
+]
