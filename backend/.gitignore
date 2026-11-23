@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.example
+*.db
+.vscode/
+.pytest_cache/
+.ruff_cache/
+storage/
+*.dcm
+*.nii
+*.nii.gz
