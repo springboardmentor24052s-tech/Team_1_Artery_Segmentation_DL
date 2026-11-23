@@ -1,0 +1,152 @@
+{
+  "dataset": "ARCADE (X-ray coronary angiography, 512x512, CC0)",
+  "source": "https://zenodo.org/records/10390295",
+  "syntax": {
+    "train": {
+      "images": 1000,
+      "objects": 4976,
+      "objects_per_image_mean": 4.98,
+      "foreground_fraction_mean": 0.0335,
+      "per_class_counts": {
+        "1": 374,
+        "2": 375,
+        "3": 369,
+        "4": 303,
+        "5": 525,
+        "6": 537,
+        "7": 340,
+        "8": 310,
+        "9": 198,
+        "9a": 70,
+        "10": 21,
+        "10a": 1,
+        "11": 320,
+        "12": 61,
+        "12a": 129,
+        "13": 305,
+        "14": 107,
+        "14a": 49,
+        "15": 38,
+        "16": 232,
+        "16a": 43,
+        "16b": 48,
+        "16c": 31,
+        "12b": 63,
+        "14b": 127
+      },
+      "lesion_area_px": null
+    },
+    "val": {
+      "images": 200,
+      "objects": 1168,
+      "objects_per_image_mean": 5.84,
+      "foreground_fraction_mean": 0.0368,
+      "per_class_counts": {
+        "1": 66,
+        "2": 66,
+        "3": 66,
+        "4": 56,
+        "5": 130,
+        "6": 125,
+        "7": 77,
+        "8": 74,
+        "9": 50,
+        "9a": 25,
+        "10": 21,
+        "10a": 6,
+        "11": 70,
+        "12": 17,
+        "12a": 27,
+        "13": 70,
+        "14": 20,
+        "14a": 24,
+        "15": 3,
+        "16": 55,
+        "16a": 13,
+        "16b": 15,
+        "16c": 16,
+        "12b": 18,
+        "14b": 58
+      },
+      "lesion_area_px": null
+    },
+    "test": {
+      "images": 300,
+      "objects": 1672,
+      "objects_per_image_mean": 5.57,
+      "foreground_fraction_mean": 0.0368,
+      "per_class_counts": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 92,
+        "5": 195,
+        "6": 188,
+        "7": 83,
+        "8": 80,
+        "9": 66,
+        "9a": 35,
+        "10": 14,
+        "11": 119,
+        "12": 15,
+        "12a": 23,
+        "13": 110,
+        "14": 67,
+        "14a": 27,
+        "15": 11,
+        "16": 88,
+        "16a": 24,
+        "16b": 24,
+        "16c": 25,
+        "12b": 49,
+        "14b": 37
+      },
+      "lesion_area_px": null
+    }
+  },
+  "stenosis": {
+    "train": {
+      "images": 1000,
+      "objects": 1625,
+      "objects_per_image_mean": 1.62,
+      "foreground_fraction_mean": 0.0081,
+      "per_class_counts": {},
+      "lesion_area_px": {
+        "mean": 1210.4,
+        "median": 983.0,
+        "min": 96.0,
+        "max": 6391.0
+      }
+    },
+    "val": {
+      "images": 200,
+      "objects": 406,
+      "objects_per_image_mean": 2.03,
+      "foreground_fraction_mean": 0.0086,
+      "per_class_counts": {},
+      "lesion_area_px": {
+        "mean": 1030.2,
+        "median": 800.5,
+        "min": 96.0,
+        "max": 4623.0
+      }
+    },
+    "test": {
+      "images": 300,
+      "objects": 386,
+      "objects_per_image_mean": 1.29,
+      "foreground_fraction_mean": 0.0098,
+      "per_class_counts": {},
+      "lesion_area_px": {
+        "mean": 1866.0,
+        "median": 1581.5,
+        "min": 267.0,
+        "max": 7054.0
+      }
+    }
+  },
+  "intensity": {
+    "mean": 112.3,
+    "std": 41.91
+  }
+}
