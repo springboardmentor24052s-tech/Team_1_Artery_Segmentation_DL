@@ -1,0 +1,107 @@
+
+{
+  "database": "PostgreSQL",
+  "project": "Artery Segmentation and Stenosis Detection Using Advanced Deep Learning Techniques",
+  "tables": [
+    {
+      "name": "users",
+      "columns": [
+        {"name": "user_id", "type": "UUID", "primary_key": true},
+        {"name": "full_name", "type": "VARCHAR(100)", "nullable": false},
+        {"name": "email", "type": "VARCHAR(255)", "nullable": false, "unique": true},
+        {"name": "password_hash", "type": "TEXT", "nullable": false},
+        {"name": "role", "type": "VARCHAR(30)", "nullable": false},
+        {"name": "is_active", "type": "BOOLEAN", "default": true},
+        {"name": "created_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    },
+    {
+      "name": "cases",
+      "columns": [
+        {"name": "case_id", "type": "UUID", "primary_key": true},
+        {"name": "created_by", "type": "UUID", "foreign_key": "users.user_id"},
+        {"name": "case_code", "type": "VARCHAR(50)", "unique": true},
+        {"name": "modality", "type": "VARCHAR(30)"},
+        {"name": "anatomical_region", "type": "VARCHAR(100)"},
+        {"name": "study_date", "type": "DATE"},
+        {"name": "status", "type": "VARCHAR(30)", "default": "new"},
+        {"name": "created_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    },
+    {
+      "name": "medical_images",
+      "columns": [
+        {"name": "image_id", "type": "UUID", "primary_key": true},
+        {"name": "case_id", "type": "UUID", "foreign_key": "cases.case_id"},
+        {"name": "file_name", "type": "VARCHAR(255)"},
+        {"name": "storage_uri", "type": "TEXT"},
+        {"name": "format", "type": "VARCHAR(20)"},
+        {"name": "width", "type": "INTEGER"},
+        {"name": "height", "type": "INTEGER"},
+        {"name": "metadata", "type": "JSONB"},
+        {"name": "uploaded_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    },
+    {
+      "name": "model_versions",
+      "columns": [
+        {"name": "model_version_id", "type": "UUID", "primary_key": true},
+        {"name": "model_name", "type": "VARCHAR(100)"},
+        {"name": "version", "type": "VARCHAR(50)"},
+        {"name": "task_type", "type": "VARCHAR(40)"},
+        {"name": "storage_uri", "type": "TEXT"},
+        {"name": "evaluation_metrics", "type": "JSONB"},
+        {"name": "created_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ],
+      "unique_constraints": [
+        ["model_name", "version"]
+      ]
+    },
+    {
+      "name": "analysis_runs",
+      "columns": [
+        {"name": "analysis_id", "type": "UUID", "primary_key": true},
+        {"name": "case_id", "type": "UUID", "foreign_key": "cases.case_id"},
+        {"name": "image_id", "type": "UUID", "foreign_key": "medical_images.image_id"},
+        {"name": "model_version_id", "type": "UUID", "foreign_key": "model_versions.model_version_id"},
+        {"name": "status", "type": "VARCHAR(30)", "default": "queued"},
+        {"name": "measurements", "type": "JSONB"},
+        {"name": "started_at", "type": "TIMESTAMPTZ"},
+        {"name": "completed_at", "type": "TIMESTAMPTZ"},
+        {"name": "created_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    },
+    {
+      "name": "stenosis_findings",
+      "columns": [
+        {"name": "finding_id", "type": "UUID", "primary_key": true},
+        {"name": "analysis_id", "type": "UUID", "foreign_key": "analysis_runs.analysis_id"},
+        {"name": "location_label", "type": "VARCHAR(100)"},
+        {"name": "estimated_narrowing_pct", "type": "REAL"},
+        {"name": "severity", "type": "VARCHAR(30)"},
+        {"name": "confidence", "type": "REAL"},
+        {"name": "created_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    },
+    {
+      "name": "analysis_artifacts",
+      "columns": [
+        {"name": "artifact_id", "type": "UUID", "primary_key": true},
+        {"name": "analysis_id", "type": "UUID", "foreign_key": "analysis_runs.analysis_id"},
+        {"name": "artifact_type", "type": "VARCHAR(40)"},
+        {"name": "storage_uri", "type": "TEXT"},
+        {"name": "created_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    },
+    {
+      "name": "reports",
+      "columns": [
+        {"name": "report_id", "type": "UUID", "primary_key": true},
+        {"name": "analysis_id", "type": "UUID", "foreign_key": "analysis_runs.analysis_id"},
+        {"name": "report_format", "type": "VARCHAR(10)"},
+        {"name": "storage_uri", "type": "TEXT"},
+        {"name": "generated_at", "type": "TIMESTAMPTZ", "default": "now()"}
+      ]
+    }
+  ]
+}

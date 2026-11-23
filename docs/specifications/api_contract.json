@@ -1,0 +1,45 @@
+{
+  "task": "Milestone 3 Task 9: AI Analysis Dashboard - Backend REST API Contract",
+  "endpoint": "POST /api/v1/analysis/predict",
+  "content_type": "multipart/form-data",
+  "supported_extensions": [".png", ".jpg", ".jpeg", ".dcm", ".nii", ".nii.gz"],
+  "response_schema": {
+    "status": "string (success | error)",
+    "filename": "string",
+    "total_lesions_detected": "integer",
+    "overall_assessment": "string",
+    "primary_action": "string",
+    "latency_ms": "float",
+    "findings": [
+      {
+        "lesion_id": "integer",
+        "bbox": "[x1, y1, x2, y2]",
+        "centroid": "[cx, cy]",
+        "probability_stenosis": "float (0.0 to 1.0)",
+        "qca_metrics": {
+          "mld_mm": "float",
+          "rvd_mm": "float",
+          "pct_stenosis": "float",
+          "lesion_length_mm": "float"
+        },
+        "coronary_branch": "string (LAD | LCx | RCA | LMCA)",
+        "segment_code": "string",
+        "severity_grade": "string (Mild | Moderate | Severe | Critical)",
+        "hemodynamic_significance": "string",
+        "clinical_recommendation": "string",
+        "color_hex": "string"
+      }
+    ],
+    "xai_4panel_url": "string (URL to Clinical Diagnostic Quad-View)",
+    "xai_5panel_url": "string (URL to Quantitative QCA Caliper View)",
+    "preview_slice_url": "string (Optional URL to extracted CT axial slice)",
+    "lumen_profile_data": {
+      "distances_mm": "array of floats",
+      "lumen_areas_mm2": "array of floats",
+      "healthy_reference_mm2": "array of floats",
+      "min_lumen_area_mm2": "float",
+      "max_stenosis_pct": "float"
+    }
+  }
+}
+
