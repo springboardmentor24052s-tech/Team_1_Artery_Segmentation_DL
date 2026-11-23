@@ -1,0 +1,16 @@
+# ==============================================================================
+# StenoVision - Grafana Automated Dashboard Provider Provisioning
+# ==============================================================================
+
+apiVersion: 1
+
+providers:
+  - name: "StenoVision Dashboards"
+    orgId: 1
+    folder: "Healthcare AI"
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

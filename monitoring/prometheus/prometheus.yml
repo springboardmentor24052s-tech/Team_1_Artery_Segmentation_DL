@@ -1,0 +1,25 @@
+# ==============================================================================
+# StenoVision - Prometheus Scraper Configuration
+# Milestone 4: Operational Monitoring & Performance Metrics
+# ==============================================================================
+
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+  scrape_timeout: 5s
+
+scrape_configs:
+  # 1. FastAPI REST Microservice & Deep Learning Engine
+  - job_name: "stenovision-backend"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["backend:8000"]
+        labels:
+          service: "stenovision-backend"
+          environment: "production"
+          tier: "api"
+
+  # 2. Prometheus Self-Monitoring
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
