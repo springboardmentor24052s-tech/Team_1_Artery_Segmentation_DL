@@ -1,0 +1,6 @@
+{
+  "name": "StenoVision",
+  "description": "Artery Segmentation and Stenosis Detection Using Advanced Deep Learning Techniques",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

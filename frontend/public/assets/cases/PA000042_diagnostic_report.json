@@ -1,0 +1,109 @@
+{
+  "image": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\datasets\\2\\train\\train\\PA000042\\image\\PA000042.nii.gz",
+  "total_lesions_detected": 3,
+  "findings": [
+    {
+      "lesion_id": 1,
+      "bbox": [
+        114,
+        336,
+        194,
+        372
+      ],
+      "centroid": [
+        154,
+        354
+      ],
+      "probability_stenosis": 0.456,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.1,
+        "pct_stenosis": 52.2,
+        "lesion_length_mm": 21.93
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate \u2013 Moderate stenosis.",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Hemodynamic Significance (Inducible Ischemia Risk)",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 2,
+      "bbox": [
+        83,
+        305,
+        160,
+        341
+      ],
+      "centroid": [
+        121,
+        323
+      ],
+      "probability_stenosis": 0.612,
+      "qca_metrics": {
+        "mld_mm": 0.0,
+        "rvd_mm": 2.1,
+        "pct_stenosis": 70.3,
+        "lesion_length_mm": 21.25
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Severe \u2013 Significant arterial narrowing.",
+      "severity_tier": "Severe",
+      "hemodynamic_significance": "Hemodynamically Significant (Ischemia Highly Probable)",
+      "clinical_recommendation": "Percutaneous Coronary Intervention (PCI) / Revascularization Consultation",
+      "color_hex": "#ef4444"
+    },
+    {
+      "lesion_id": 3,
+      "bbox": [
+        167,
+        335,
+        220,
+        378
+      ],
+      "centroid": [
+        193,
+        356
+      ],
+      "probability_stenosis": 0.483,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.1,
+        "pct_stenosis": 53.0,
+        "lesion_length_mm": 17.06
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate \u2013 Moderate stenosis.",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Hemodynamic Significance (Inducible Ischemia Risk)",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    }
+  ],
+  "overall_assessment": "Moderate \u2013 Moderate stenosis.",
+  "primary_action": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+  "latency_ms": 297.96,
+  "xai_explanation_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000042_xai_explanation.png",
+  "xai_5panel_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000042_5panel_explanation.png",
+  "xai_4panel_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000042_4panel_explanation.png",
+  "preview_slice_path": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000042_preview_slice.png",
+  "volumetric_metadata": {
+    "is_3d_volume": true,
+    "volume_shape": [
+      512,
+      512,
+      297
+    ],
+    "selected_slice_idx": 194,
+    "total_slices": 297,
+    "modality": "3D CT Angiography (CTPA)",
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ]
+  }
+}

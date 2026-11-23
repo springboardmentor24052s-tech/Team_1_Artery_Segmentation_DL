@@ -1,0 +1,27 @@
+{
+  "image": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\datasets\\2\\train\\train\\PA000016\\image\\PA000016.nii.gz",
+  "total_lesions_detected": 0,
+  "findings": [],
+  "overall_assessment": "Normal Vessel (No Stenosis)",
+  "primary_action": "No intervention required",
+  "latency_ms": 63.77,
+  "xai_explanation_plot": null,
+  "xai_5panel_plot": null,
+  "xai_4panel_plot": null,
+  "preview_slice_path": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000016_preview_slice.png",
+  "volumetric_metadata": {
+    "is_3d_volume": true,
+    "volume_shape": [
+      512,
+      512,
+      295
+    ],
+    "selected_slice_idx": 175,
+    "total_slices": 295,
+    "modality": "3D CT Angiography (CTPA)",
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ]
+  }
+}

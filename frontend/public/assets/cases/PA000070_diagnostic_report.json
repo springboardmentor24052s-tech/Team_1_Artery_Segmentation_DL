@@ -1,0 +1,82 @@
+{
+  "image": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\datasets\\2\\train\\train\\PA000070\\image\\PA000070.nii.gz",
+  "total_lesions_detected": 2,
+  "findings": [
+    {
+      "lesion_id": 1,
+      "bbox": [
+        346,
+        72,
+        395,
+        123
+      ],
+      "centroid": [
+        370,
+        97
+      ],
+      "probability_stenosis": 0.627,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.5,
+        "pct_stenosis": 59.2,
+        "lesion_length_mm": 17.68
+      },
+      "coronary_branch": "Left Circumflex Artery (LCx - Proximal)",
+      "segment_code": "LCx-1",
+      "severity_grade": "Moderate \u2013 Moderate stenosis.",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Hemodynamic Significance (Inducible Ischemia Risk)",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 2,
+      "bbox": [
+        374,
+        97,
+        431,
+        143
+      ],
+      "centroid": [
+        402,
+        120
+      ],
+      "probability_stenosis": 0.66,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.7,
+        "pct_stenosis": 63.4,
+        "lesion_length_mm": 18.31
+      },
+      "coronary_branch": "Obtuse Marginal Branch (OM)",
+      "segment_code": "OM-Branch",
+      "severity_grade": "Moderate \u2013 Moderate stenosis.",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Hemodynamic Significance (Inducible Ischemia Risk)",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    }
+  ],
+  "overall_assessment": "Moderate \u2013 Moderate stenosis.",
+  "primary_action": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+  "latency_ms": 334.21,
+  "xai_explanation_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000070_xai_explanation.png",
+  "xai_5panel_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000070_5panel_explanation.png",
+  "xai_4panel_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000070_4panel_explanation.png",
+  "preview_slice_path": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\frontend\\public\\assets\\cases\\PA000070_preview_slice.png",
+  "volumetric_metadata": {
+    "is_3d_volume": true,
+    "volume_shape": [
+      512,
+      512,
+      248
+    ],
+    "selected_slice_idx": 158,
+    "total_slices": 248,
+    "modality": "3D CT Angiography (CTPA)",
+    "hu_range": [
+      -1024.0,
+      3071.0
+    ]
+  }
+}
