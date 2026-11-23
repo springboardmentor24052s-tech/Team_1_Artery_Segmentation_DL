@@ -1,0 +1,145 @@
+{
+  "image": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\data\\stenosis\\test\\images\\10.png",
+  "total_lesions_detected": 5,
+  "findings": [
+    {
+      "lesion_id": 1,
+      "bbox": [
+        187,
+        245,
+        239,
+        291
+      ],
+      "centroid": [
+        213,
+        268
+      ],
+      "probability_stenosis": 0.858,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.88,
+        "pct_stenosis": 64.7,
+        "lesion_length_mm": 17.36
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 2,
+      "bbox": [
+        156,
+        259,
+        216,
+        308
+      ],
+      "centroid": [
+        186,
+        283
+      ],
+      "probability_stenosis": 0.8,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.7,
+        "pct_stenosis": 64.1,
+        "lesion_length_mm": 19.37
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 3,
+      "bbox": [
+        14,
+        284,
+        55,
+        334
+      ],
+      "centroid": [
+        34,
+        309
+      ],
+      "probability_stenosis": 0.87,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.0,
+        "pct_stenosis": 65.0,
+        "lesion_length_mm": 16.17
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 4,
+      "bbox": [
+        180,
+        357,
+        222,
+        403
+      ],
+      "centroid": [
+        201,
+        380
+      ],
+      "probability_stenosis": 0.857,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.2,
+        "pct_stenosis": 66.2,
+        "lesion_length_mm": 15.57
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 5,
+      "bbox": [
+        197,
+        392,
+        240,
+        438
+      ],
+      "centroid": [
+        218,
+        415
+      ],
+      "probability_stenosis": 0.882,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.9,
+        "pct_stenosis": 65.1,
+        "lesion_length_mm": 15.74
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Distal / Apical)",
+      "segment_code": "LAD-3",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    }
+  ],
+  "overall_assessment": "Moderate Stenosis",
+  "primary_action": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+  "latency_ms": 1816.69,
+  "xai_explanation_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\milestone_3_results\\live_verification\\10_xai_explanation.png"
+}

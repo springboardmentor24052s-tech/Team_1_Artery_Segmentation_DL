@@ -1,0 +1,36 @@
+{
+  "task": "Milestone 3 Task 2: Candidate Region Extraction",
+  "method": "Geometric Medial Centerline Diameter Trough Analysis",
+  "narrowing_threshold": 0.30,
+  "pixel_spacing_mm": 0.25,
+  "sample_evaluations": [
+    {
+      "image_id": "10.png",
+      "vessel_territory": "LAD",
+      "total_candidates_extracted": 2,
+      "candidates": [
+        {
+          "candidate_id": 1,
+          "bbox": [182, 245, 258, 308],
+          "centroid": [220, 276],
+          "mld_mm": 0.50,
+          "rvd_mm": 2.88,
+          "estimated_pct_stenosis": 64.7,
+          "candidate_type": "geometric_caliper_trough",
+          "selection_rationale": "Relative caliber drop of 64.7% >= 30.0% threshold"
+        },
+        {
+          "candidate_id": 2,
+          "bbox": [310, 140, 370, 195],
+          "centroid": [340, 167],
+          "mld_mm": 1.25,
+          "rvd_mm": 1.85,
+          "estimated_pct_stenosis": 32.4,
+          "candidate_type": "geometric_caliper_trough",
+          "selection_rationale": "Distal tapering drop of 32.4% >= 30.0% threshold"
+        }
+      ]
+    }
+  ]
+}
+

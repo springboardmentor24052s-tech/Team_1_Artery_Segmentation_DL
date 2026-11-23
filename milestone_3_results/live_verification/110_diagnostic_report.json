@@ -1,0 +1,172 @@
+{
+  "image": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\data\\stenosis\\test\\images\\110.png",
+  "total_lesions_detected": 6,
+  "findings": [
+    {
+      "lesion_id": 1,
+      "bbox": [
+        289,
+        61,
+        340,
+        115
+      ],
+      "centroid": [
+        314,
+        88
+      ],
+      "probability_stenosis": 0.627,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 1.4,
+        "pct_stenosis": 52.8,
+        "lesion_length_mm": 18.57
+      },
+      "coronary_branch": "Left Main Trunk (LMCA)",
+      "segment_code": "LM-Ostial/Bifurcation",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 2,
+      "bbox": [
+        127,
+        108,
+        171,
+        165
+      ],
+      "centroid": [
+        149,
+        136
+      ],
+      "probability_stenosis": 0.915,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.8,
+        "pct_stenosis": 64.3,
+        "lesion_length_mm": 18.0
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Proximal)",
+      "segment_code": "LAD-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 3,
+      "bbox": [
+        209,
+        115,
+        289,
+        164
+      ],
+      "centroid": [
+        249,
+        139
+      ],
+      "probability_stenosis": 0.978,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.9,
+        "pct_stenosis": 65.0,
+        "lesion_length_mm": 23.45
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Proximal)",
+      "segment_code": "LAD-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 4,
+      "bbox": [
+        110,
+        133,
+        163,
+        226
+      ],
+      "centroid": [
+        136,
+        179
+      ],
+      "probability_stenosis": 0.948,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.9,
+        "pct_stenosis": 65.4,
+        "lesion_length_mm": 26.76
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Proximal)",
+      "segment_code": "LAD-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 5,
+      "bbox": [
+        371,
+        230,
+        476,
+        307
+      ],
+      "centroid": [
+        423,
+        268
+      ],
+      "probability_stenosis": 0.778,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.7,
+        "pct_stenosis": 64.2,
+        "lesion_length_mm": 32.55
+      },
+      "coronary_branch": "Obtuse Marginal Branch (OM)",
+      "segment_code": "OM-Branch",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 6,
+      "bbox": [
+        376,
+        269,
+        418,
+        310
+      ],
+      "centroid": [
+        397,
+        289
+      ],
+      "probability_stenosis": 0.845,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.8,
+        "pct_stenosis": 64.7,
+        "lesion_length_mm": 14.67
+      },
+      "coronary_branch": "Obtuse Marginal Branch (OM)",
+      "segment_code": "OM-Branch",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    }
+  ],
+  "overall_assessment": "Moderate Stenosis",
+  "primary_action": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+  "latency_ms": 311.87,
+  "xai_explanation_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\milestone_3_results\\live_verification\\110_xai_explanation.png"
+}

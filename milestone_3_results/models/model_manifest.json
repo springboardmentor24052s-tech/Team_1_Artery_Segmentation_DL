@@ -1,0 +1,28 @@
+{
+  "milestone": "Milestone 3: Stenosis Detection, Severity Analysis & Explainable AI",
+  "created_at": "2026-11-05",
+  "status": "COMPLETED & FROZEN",
+  "models": {
+    "MultiTaskStenosisResNet18": {
+      "role": "Lesion Classifier, Severity Grader & Grad-CAM Target",
+      "filename": "best_stenosis_classifier.pth",
+      "size_bytes": 138158182,
+      "sha256": "9bf3966ac0a4ddf43f392b08752dc4c9de0d95501aaef2788db9c23879defa8c",
+      "architecture": "ResNet-18 with Spatial Attention",
+      "parameters": 11333191,
+      "validation_severity_accuracy": 74.86,
+      "validation_binary_accuracy": 87.43,
+      "validation_ds_mae": 9.54
+    },
+    "FasterRCNN_MobileNetV3_Large_FPN": {
+      "role": "Whole-Image 512x512 Stenosis Bounding Box Detector",
+      "filename": "best_stenosis_detector.pth",
+      "size_bytes": 151531603,
+      "sha256": "f8a035728e0a9f84856ba10ed2d878416a7d4eded751ef9d0d5287202cdc547b",
+      "architecture": "Faster R-CNN MobileNetV3-Large-FPN",
+      "parameters": 19379894,
+      "validation_loss": 0.1713,
+      "throughput_fps": 29.8
+    }
+  }
+}

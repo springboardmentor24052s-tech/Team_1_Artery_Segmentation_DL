@@ -1,0 +1,30 @@
+{
+  "task": "Milestone 3 Tasks 5 & 6: Severity Classification & Quantitative %DS Calculation",
+  "calibration_scale_mm_per_px": 0.25,
+  "guideline_framework": "ACC/AHA Clinical Revascularization Consensus",
+  "sample_evaluations": [
+    {
+      "lesion_id": 1,
+      "case_id": "CASE-1010",
+      "patient_name": "Eleanor Vance",
+      "qca_metrics": {
+        "mld_px": 2.0,
+        "mld_mm": 0.50,
+        "rvd_px": 11.52,
+        "rvd_mm": 2.88,
+        "diameter_stenosis_pct": 64.7,
+        "area_stenosis_pct": 87.5,
+        "lesion_length_mm": 14.8,
+        "plaque_burden_volume_mm3": 28.4
+      },
+      "severity_classification": {
+        "acc_aha_tier": "Moderate",
+        "description": "Moderate stenosis (50% - 69% DS)",
+        "hemodynamic_risk": "Potentially Flow-Limiting (Moderate Ischemia Risk)",
+        "clinical_action": "Fractional Flow Reserve (FFR/iFR) physiological evaluation recommended prior to invasive revascularization (PCI/CABG).",
+        "urgency": "Elective / Outpatient Diagnostic Workup"
+      }
+    }
+  ]
+}
+

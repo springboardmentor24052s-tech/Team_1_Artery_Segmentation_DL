@@ -1,0 +1,21 @@
+{
+  "task": "Milestone 3 Task 7: Native PyTorch Grad-CAM Explainable AI",
+  "target_layer": "MultiTaskResNet18.layer4[-1].conv2",
+  "attribution_head": "severity_head",
+  "resolution": [128, 128],
+  "sample_evaluation": {
+    "patch_id": "PATCH-1010-01",
+    "predicted_class": "Moderate",
+    "confidence_logit": 3.842,
+    "top_gradient_channels": [142, 287, 401, 502],
+    "mean_gradient_magnitude": 0.0412,
+    "peak_saliency_coordinates": [64, 58],
+    "saliency_distribution": {
+      "intraluminal_filling_defect_focus": "89.4% of high attribution mass (>0.7) resides inside the vascular contour",
+      "catheter_shaft_leakage": "0.8% (suppressed by soft spatial attention)",
+      "thoracic_rib_leakage": "1.2% (suppressed by soft spatial attention)"
+    },
+    "clinical_justification": "Gradient flow is concentrated directly across the intraluminal contrast filling defect where lumen diameter is compressed to 0.50 mm."
+  }
+}
+

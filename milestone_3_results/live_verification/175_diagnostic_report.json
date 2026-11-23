@@ -1,0 +1,280 @@
+{
+  "image": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\data\\stenosis\\test\\images\\175.png",
+  "total_lesions_detected": 10,
+  "findings": [
+    {
+      "lesion_id": 1,
+      "bbox": [
+        242,
+        265,
+        272,
+        297
+      ],
+      "centroid": [
+        257,
+        281
+      ],
+      "probability_stenosis": 0.811,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.0,
+        "pct_stenosis": 66.9,
+        "lesion_length_mm": 10.97
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 2,
+      "bbox": [
+        237,
+        248,
+        280,
+        269
+      ],
+      "centroid": [
+        258,
+        258
+      ],
+      "probability_stenosis": 0.829,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.3,
+        "pct_stenosis": 66.9,
+        "lesion_length_mm": 11.96
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 3,
+      "bbox": [
+        232,
+        222,
+        280,
+        307
+      ],
+      "centroid": [
+        256,
+        264
+      ],
+      "probability_stenosis": 0.815,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.2,
+        "pct_stenosis": 66.9,
+        "lesion_length_mm": 24.4
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Mid)",
+      "segment_code": "LAD-2",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 4,
+      "bbox": [
+        33,
+        47,
+        74,
+        91
+      ],
+      "centroid": [
+        53,
+        69
+      ],
+      "probability_stenosis": 0.682,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 4.0,
+        "pct_stenosis": 67.9,
+        "lesion_length_mm": 15.04
+      },
+      "coronary_branch": "Right Coronary Artery (RCA - Proximal)",
+      "segment_code": "RCA-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 5,
+      "bbox": [
+        106,
+        50,
+        148,
+        94
+      ],
+      "centroid": [
+        127,
+        72
+      ],
+      "probability_stenosis": 0.823,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.7,
+        "pct_stenosis": 67.7,
+        "lesion_length_mm": 15.21
+      },
+      "coronary_branch": "Right Coronary Artery (RCA - Proximal)",
+      "segment_code": "RCA-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 6,
+      "bbox": [
+        149,
+        85,
+        206,
+        139
+      ],
+      "centroid": [
+        177,
+        112
+      ],
+      "probability_stenosis": 0.337,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.2,
+        "pct_stenosis": 54.3,
+        "lesion_length_mm": 19.63
+      },
+      "coronary_branch": "Right Coronary Artery (RCA - Proximal)",
+      "segment_code": "RCA-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 7,
+      "bbox": [
+        160,
+        142,
+        204,
+        185
+      ],
+      "centroid": [
+        182,
+        163
+      ],
+      "probability_stenosis": 0.834,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.2,
+        "pct_stenosis": 66.9,
+        "lesion_length_mm": 15.38
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Proximal)",
+      "segment_code": "LAD-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 8,
+      "bbox": [
+        253,
+        169,
+        297,
+        214
+      ],
+      "centroid": [
+        275,
+        191
+      ],
+      "probability_stenosis": 0.412,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 1.6,
+        "pct_stenosis": 47.3,
+        "lesion_length_mm": 15.73
+      },
+      "coronary_branch": "Left Circumflex Artery (LCx - Proximal)",
+      "segment_code": "LCx-1",
+      "severity_grade": "Mild Stenosis",
+      "severity_tier": "Mild",
+      "hemodynamic_significance": "Hemodynamically Insignificant",
+      "clinical_recommendation": "Optimal Medical Therapy (OMT) & Lifestyle Monitoring",
+      "color_hex": "#22c55e"
+    },
+    {
+      "lesion_id": 9,
+      "bbox": [
+        126,
+        181,
+        179,
+        242
+      ],
+      "centroid": [
+        152,
+        211
+      ],
+      "probability_stenosis": 0.136,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 3.2,
+        "pct_stenosis": 51.1,
+        "lesion_length_mm": 20.2
+      },
+      "coronary_branch": "Left Anterior Descending (LAD - Proximal)",
+      "segment_code": "LAD-1",
+      "severity_grade": "Moderate Stenosis",
+      "severity_tier": "Moderate",
+      "hemodynamic_significance": "Borderline Significance",
+      "clinical_recommendation": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+      "color_hex": "#f59e0b"
+    },
+    {
+      "lesion_id": 10,
+      "bbox": [
+        285,
+        190,
+        368,
+        269
+      ],
+      "centroid": [
+        326,
+        229
+      ],
+      "probability_stenosis": 0.066,
+      "qca_metrics": {
+        "mld_mm": 0.5,
+        "rvd_mm": 2.0,
+        "pct_stenosis": 45.1,
+        "lesion_length_mm": 28.65
+      },
+      "coronary_branch": "Left Circumflex Artery (LCx - Proximal)",
+      "segment_code": "LCx-1",
+      "severity_grade": "Mild Stenosis",
+      "severity_tier": "Mild",
+      "hemodynamic_significance": "Hemodynamically Insignificant",
+      "clinical_recommendation": "Optimal Medical Therapy (OMT) & Lifestyle Monitoring",
+      "color_hex": "#22c55e"
+    }
+  ],
+  "overall_assessment": "Moderate Stenosis",
+  "primary_action": "Fractional Flow Reserve (FFR/iFR) Evaluation Recommended",
+  "latency_ms": 400.42,
+  "xai_explanation_plot": "D:\\ksmashhero\\Certificates\\infosys springboard\\Infosys Springboard_virtual internship 7.0\\StenoVision\\milestone_3_results\\live_verification\\175_xai_explanation.png"
+}
