@@ -1,0 +1,54 @@
+{
+  "suite": "RBAC & Suitability Matrix Verification",
+  "status": "PASSED",
+  "roles_tested": 5,
+  "total_duration_seconds": 0.109,
+  "matrix": {
+    "frontend_definitions": "VERIFIED",
+    "signoff_enforcement": {
+      "Developer": {
+        "http_code": 403,
+        "allowed": false
+      },
+      "Radiologist / Clinician": {
+        "http_code": 200,
+        "allowed": true
+      },
+      "Medical Researcher": {
+        "http_code": 403,
+        "allowed": false
+      },
+      "Data Scientist": {
+        "http_code": 403,
+        "allowed": false
+      },
+      "Administrator": {
+        "http_code": 403,
+        "allowed": false
+      }
+    },
+    "deploy_enforcement": {
+      "Developer": {
+        "http_code": 200,
+        "allowed": true
+      },
+      "Radiologist / Clinician": {
+        "http_code": 403,
+        "allowed": false
+      },
+      "Medical Researcher": {
+        "http_code": 403,
+        "allowed": false
+      },
+      "Data Scientist": {
+        "http_code": 200,
+        "allowed": true
+      },
+      "Administrator": {
+        "http_code": 403,
+        "allowed": false
+      }
+    },
+    "deidentification_logic": "VERIFIED"
+  }
+}

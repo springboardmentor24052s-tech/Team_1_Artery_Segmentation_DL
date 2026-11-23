@@ -1,0 +1,27 @@
+{
+  "suite": "Deep Learning Latency & Cine-Fluoroscopy Benchmarking",
+  "status": "PASSED",
+  "total_duration_seconds": 10.518,
+  "metrics": {
+    "inference_distribution": {
+      "frames_evaluated": 50,
+      "mean_latency_ms": 25.68,
+      "std_dev_ms": 0.66,
+      "median_p50_ms": 25.44,
+      "p90_ms": 26.58,
+      "p95_ms": 27.32,
+      "p99_ms": 28.36,
+      "throughput_fps": 38.9,
+      "medical_cine_standard_met": true
+    },
+    "clinical_artifacts": {
+      "pdf_cycles": 10,
+      "mean_pdf_ms": 921.42,
+      "p95_pdf_ms": 1269.05,
+      "avg_pdf_kb": 1377.8,
+      "sub_second_sla_met": false,
+      "mean_json_ms": 0.03,
+      "mean_csv_ms": 0.34
+    }
+  }
+}

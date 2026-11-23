@@ -1,0 +1,77 @@
+{
+  "suite": "Live Playwright Browser Operations & Color Audit",
+  "status": "PASSED",
+  "total_phases": 12,
+  "phases_passed": 12,
+  "total_duration_seconds": 52.77,
+  "phases": {
+    "phase_1_header_roles": {
+      "status": "PASSED",
+      "duration_ms": 5754.46
+    },
+    "phase_2_dashboard": {
+      "status": "PASSED",
+      "duration_ms": 167.81
+    },
+    "phase_3_case_management": {
+      "status": "PASSED",
+      "duration_ms": 1479.87
+    },
+    "phase_4_case_details": {
+      "status": "PASSED",
+      "duration_ms": 1687.22
+    },
+    "phase_5_upload": {
+      "status": "PASSED",
+      "duration_ms": 4577.22
+    },
+    "phase_6_config_exec": {
+      "status": "PASSED",
+      "duration_ms": 4525.32
+    },
+    "phase_7_results": {
+      "status": "PASSED",
+      "duration_ms": 3183.0
+    },
+    "phase_8_models": {
+      "status": "PASSED",
+      "duration_ms": 5813.65
+    },
+    "phase_9_report_modal": {
+      "status": "PASSED",
+      "duration_ms": 3816.7
+    },
+    "phase_10_signoff_enforcement": {
+      "status": "PASSED",
+      "duration_ms": 7819.74
+    },
+    "phase_11_user_mgmt": {
+      "status": "PASSED",
+      "duration_ms": 3829.65
+    },
+    "phase_12_researcher_workflow": {
+      "status": "PASSED",
+      "duration_ms": 9729.22
+    }
+  },
+  "evidence_saved": [
+    "e2e_01_header_roles.png",
+    "e2e_02_dashboard.png",
+    "e2e_03_case_management.png",
+    "e2e_04_case_details_3d.png",
+    "e2e_05_upload_presets.png",
+    "e2e_06_analysis_config.png",
+    "e2e_07_analysis_results.png",
+    "e2e_08_model_comparison_scorecard.png",
+    "e2e_09_model_comparison_radar.png",
+    "e2e_10_model_comparison_visual_3d.png",
+    "e2e_11_generate_report_modal_solid.png",
+    "e2e_12_report_detail_modal_solid.png",
+    "e2e_13_user_management_modal_solid.png",
+    "rbac_01_researcher_deidentified_cases.png",
+    "rbac_02_researcher_upload_deid.png",
+    "rbac_03_developer_signoff_restricted.png",
+    "rbac_04_clinician_signoff_authorized.png",
+    "rbac_05_researcher_readonly_directory.png"
+  ]
+}

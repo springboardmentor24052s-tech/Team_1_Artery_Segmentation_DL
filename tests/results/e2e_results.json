@@ -1,0 +1,56 @@
+{
+  "suite": "End-to-End Pipeline Verification",
+  "status": "PASSED",
+  "stages_passed": 6,
+  "total_stages": 6,
+  "total_duration_seconds": 0.828,
+  "stages": {
+    "stage_1_ingestion": {
+      "status": "PASSED",
+      "case_id": "CASE-1010",
+      "patient_name": "Eleanor Vance",
+      "target_vessel": "LAD (Left Anterior Descending)",
+      "aha_segment": "Segment 7 (Mid LAD)",
+      "duration_ms": 0.16
+    },
+    "stage_2_segmentation": {
+      "status": "PASSED",
+      "model": "Attention U-Net v1.1",
+      "dice": 0.6833,
+      "iou": 0.5356,
+      "specificity": 0.9909,
+      "duration_ms": 0.0
+    },
+    "stage_3_calipers": {
+      "status": "PASSED",
+      "rvd_mm": 2.88,
+      "mld_mm": 0.5,
+      "pct_stenosis": 64.7,
+      "pct_area_stenosis": 87.5,
+      "lesion_length_mm": 14.8,
+      "duration_ms": 0.0
+    },
+    "stage_4_classification": {
+      "status": "PASSED",
+      "severity_tier": "Moderate",
+      "hemodynamic_risk": "Borderline Flow-Limiting (Inducible Ischemia Risk)",
+      "recommendation": "Fractional Flow Reserve (FFR/iFR) Physiological Evaluation Recommended",
+      "duration_ms": 0.0
+    },
+    "stage_5_xai": {
+      "status": "PASSED",
+      "raw_img": "10.png",
+      "mask_img": "10_mask.png",
+      "heatmap_img": "10_heatmap.png",
+      "four_panel_img": "10_4panel_severity.png",
+      "duration_ms": 0.24
+    },
+    "stage_6_reporting": {
+      "status": "PASSED",
+      "pdf_bytes": 1410897,
+      "pdf_duration_ms": 827.17,
+      "json_chars": 2088,
+      "csv_rows": 19
+    }
+  }
+}

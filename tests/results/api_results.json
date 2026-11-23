@@ -1,0 +1,50 @@
+{
+  "suite": "REST API Microservices Verification",
+  "status": "PASSED",
+  "total_groups": 7,
+  "groups_passed": 7,
+  "total_duration_seconds": 1.073,
+  "groups": {
+    "1_health": {
+      "status": "PASSED",
+      "http_code": 200,
+      "latency_ms": 71.25
+    },
+    "2_authentication": {
+      "status": "PASSED",
+      "http_code": 401,
+      "latency_ms": 13.09
+    },
+    "3_cases": {
+      "status": "PASSED",
+      "unauth_code": 401,
+      "auth_code": 200,
+      "latency_ms": 34.59
+    },
+    "4_analysis": {
+      "status": "PASSED",
+      "http_code": 200,
+      "sample_cases_count": 5,
+      "latency_ms": 7.1
+    },
+    "5_models": {
+      "status": "PASSED",
+      "models_registered": 4,
+      "latency_ms": 29.08
+    },
+    "6_reporting": {
+      "status": "PASSED",
+      "reports_count": 18,
+      "pdf_bytes": 1410897,
+      "json_bytes": 2088,
+      "csv_lines": 19,
+      "latency_ms": 896.63
+    },
+    "7_errors": {
+      "status": "PASSED",
+      "report_404": 404,
+      "model_404": 404,
+      "latency_ms": 20.32
+    }
+  }
+}

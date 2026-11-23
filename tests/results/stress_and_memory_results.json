@@ -1,0 +1,40 @@
+{
+  "suite": "Burst Stress & Heap Memory Leak Profiling",
+  "status": "PASSED",
+  "total_duration_seconds": 1.237,
+  "metrics": {
+    "burst_stress_tests": [
+      {
+        "batch_size": 15,
+        "elapsed_seconds": 0.117,
+        "throughput_rps": 128.0,
+        "mean_latency_ms": 7.81,
+        "p95_latency_ms": 8.64,
+        "error_rate_pct": 0.0
+      },
+      {
+        "batch_size": 30,
+        "elapsed_seconds": 0.25,
+        "throughput_rps": 119.8,
+        "mean_latency_ms": 8.35,
+        "p95_latency_ms": 10.24,
+        "error_rate_pct": 0.0
+      },
+      {
+        "batch_size": 50,
+        "elapsed_seconds": 0.496,
+        "throughput_rps": 100.8,
+        "mean_latency_ms": 9.92,
+        "p95_latency_ms": 13.65,
+        "error_rate_pct": 0.0
+      }
+    ],
+    "memory_profile": {
+      "heavy_cycles_executed": 25,
+      "net_heap_active_mb": 0.0098,
+      "peak_heap_mb": 0.1647,
+      "threshold_mb": 1.0,
+      "leak_detected": false
+    }
+  }
+}

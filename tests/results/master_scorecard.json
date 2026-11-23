@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-11-23T22:30:39.596477",
+  "overall_status": "PASSED",
+  "total_suites": 8,
+  "passed_suites": 8,
+  "failed_suites": 0,
+  "total_duration_seconds": 16.45,
+  "suites": [
+    {
+      "suite_name": "1. End-to-End DL Pipeline",
+      "scope": "6 Stages (Ingest -> U-Net -> Calipers -> ResNet-18 -> XAI -> Reports)",
+      "status": "PASSED",
+      "duration_seconds": 0.829,
+      "error": null
+    },
+    {
+      "suite_name": "2. REST API Microservices",
+      "scope": "7 Groups (Health, Auth, Cases, Analysis, Models, Reports, Errors)",
+      "status": "PASSED",
+      "duration_seconds": 1.074,
+      "error": null
+    },
+    {
+      "suite_name": "3. RBAC Suitability Matrix",
+      "scope": "13 Rows (5 Personas across permissions.ts & backend endpoints)",
+      "status": "PASSED",
+      "duration_seconds": 0.11,
+      "error": null
+    },
+    {
+      "suite_name": "4. Enterprise Security Audit",
+      "scope": "7 Vectors (JWT, 5-Role 403s, SQLi Fuzzing, XSS, Traversal, Headers)",
+      "status": "PASSED",
+      "duration_seconds": 1.419,
+      "error": null
+    },
+    {
+      "suite_name": "5. HIPAA Safe Harbor Audit",
+      "scope": "3 Checks (18 Direct Identifiers Scan, MRN Tokenization, Section 14 Notice)",
+      "status": "PASSED",
+      "duration_seconds": 1.263,
+      "error": null
+    },
+    {
+      "suite_name": "6. DL Latency & Fluoroscopy FPS",
+      "scope": "Cine-Fluoroscopy >=25 FPS, Statistical Latency, PDF SLA <500ms",
+      "status": "PASSED",
+      "duration_seconds": 10.519,
+      "error": null
+    },
+    {
+      "suite_name": "7. Burst Stress & Memory Leaks",
+      "scope": "High-Speed RPS Throughput & tracemalloc Heap Profiling (<1.0 MB Delta)",
+      "status": "PASSED",
+      "duration_seconds": 1.238,
+      "error": null
+    },
+    {
+      "suite_name": "8. Live Playwright Browser Operations",
+      "scope": "12 Phases (Personas, Modalities, 3D, Presets, XAI, Reports, RBAC)",
+      "status": "PASSED",
+      "duration_seconds": 52.77,
+      "error": null
+    }
+  ]
+}
