@@ -6,12 +6,12 @@
 -- 1. Users Table (RBAC Authentication & Personnel Directory)
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
+    full_name VARCHAR(120) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     role VARCHAR(60) NOT NULL DEFAULT 'Data Scientist',
     department VARCHAR(100) NOT NULL DEFAULT 'Deep Learning Core',
     hashed_password VARCHAR(255) NOT NULL,
-    status VARCHAR(20) NOT NULL DEFAULT 'Active',
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

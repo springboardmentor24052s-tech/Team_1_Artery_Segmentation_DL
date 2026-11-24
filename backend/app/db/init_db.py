@@ -55,6 +55,13 @@ def _migrate_columns() -> None:
         
         if "users" in tables:
             user_cols = [c["name"] for c in inspector.get_columns("users")]
+            if "full_name" not in user_cols:
+                if "name" in user_cols:
+                    conn.execute(text("ALTER TABLE users RENAME COLUMN name TO full_name"))
+                else:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN full_name VARCHAR(120) DEFAULT ''"))
+            if "is_active" not in user_cols:
+                conn.execute(text("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT TRUE"))
             if "department" not in user_cols:
                 conn.execute(text("ALTER TABLE users ADD COLUMN department VARCHAR(100) DEFAULT 'Cardiovascular Research'"))
             # Migrate legacy roles to the 4 official document roles
