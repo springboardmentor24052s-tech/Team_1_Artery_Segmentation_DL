@@ -91,15 +91,15 @@ CREATE INDEX IF NOT EXISTS idx_findings_severity ON analysis_findings(severity_c
 CREATE INDEX IF NOT EXISTS idx_findings_branch ON analysis_findings(coronary_branch);
 
 -- 5. Seed Personnel Directory (Roles & Credentials)
-INSERT INTO users (name, email, role, department, hashed_password, status)
+INSERT INTO users (full_name, email, role, department, hashed_password, is_active)
 VALUES
-    ('Sathiya (Lead Dev)', 'sathiya@stenovision.ai', 'Developer', 'Lead AI & System Engineering', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', 'Active'),
-    ('Dr. Aris Thorne', 'a.thorne@stenovision.org', 'Radiologist / Clinician', 'Clinical Diagnostics', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', 'Active'),
-    ('Prof. David Chen', 'd.chen@stenovision.org', 'Medical Researcher', 'Cardiovascular Research', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', 'Active'),
-    ('Dr. Helena Rostova', 'h.rostova@stenovision.org', 'Data Scientist', 'Data Science', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', 'Active'),
-    ('Sophia Martinez', 's.martinez@stenovision.org', 'Administrator', 'Administration', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', 'Active')
+    ('Sathiya (Lead Dev)', 'sathiya@stenovision.ai', 'Developer', 'Lead AI & System Engineering', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', TRUE),
+    ('Dr. Aris Thorne', 'a.thorne@stenovision.org', 'Radiologist / Clinician', 'Clinical Diagnostics', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', TRUE),
+    ('Prof. David Chen', 'd.chen@stenovision.org', 'Medical Researcher', 'Cardiovascular Research', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', TRUE),
+    ('Dr. Helena Rostova', 'h.rostova@stenovision.org', 'Data Scientist', 'Data Science', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', TRUE),
+    ('Sophia Martinez', 's.martinez@stenovision.org', 'Administrator', 'Administration', '$2b$12$e80yq91l0h2XoYj44o7D3OiV4n5jR2X1T3pG3C8c0B1a0q.K9mK/m', TRUE)
 ON CONFLICT (email) DO UPDATE SET
-    name = EXCLUDED.name,
+    full_name = EXCLUDED.full_name,
     role = EXCLUDED.role,
     department = EXCLUDED.department;
 
