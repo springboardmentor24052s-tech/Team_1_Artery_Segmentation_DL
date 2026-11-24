@@ -465,8 +465,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                 </div>
 
                 <div
-                  className="relative w-full min-h-[330px] rounded-lg overflow-hidden border border-[#A91121]/20 bg-[#111315] transition-opacity p-2"
-                  style={{ opacity: xaiBlendOpacity / 100 }}
+                  className="relative w-full min-h-[330px] rounded-lg overflow-hidden border border-[#A91121]/20 bg-[#111315] p-2"
                 >
                   {!isLiveAnalysis && isCustomScan && effectivePayload?.previewUrl ? (
                     <div className="w-full h-full flex flex-col justify-between select-none space-y-2">
@@ -480,12 +479,158 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                         </div>
                       </div>
 
-                      {/* 4 Multi-Stage Clinical Panels */}
+                      {/* Multi-Stage Clinical Panels (Dual-Mode: 4-Panel Quad vs 5-Panel Caliper) */}
                       {(() => {
                         const safeDisplayUrl = analysisResult?.preview_slice_url || 
                           (!isVolumetricFormat && effectivePayload?.previewUrl
                             ? effectivePayload.previewUrl 
                             : '/assets/cases/PA000024_preview_slice.png');
+
+                        if (xaiCardMode === 'caliper') {
+                          return (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2 h-[260px] p-1 items-stretch">
+                              {/* Panel 1: Raw Angiogram */}
+                              <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
+                                <div className="text-[10px] font-mono text-slate-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
+                                  (1) Raw Angiogram
+                                </div>
+                                <div className="relative flex-1 bg-black flex items-center justify-center p-1">
+                                  <img
+                                    src={safeDisplayUrl}
+                                    alt="Raw Angiogram"
+                                    className="max-h-full max-w-full object-contain filter contrast-125"
+                                    onError={(e) => {
+                                      (e.currentTarget as HTMLImageElement).src = '/assets/cases/PA000024_preview_slice.png';
+                                    }}
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Panel 2: Attention U-Net Mask */}
+                              <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
+                                <div className="text-[10px] font-mono text-cyan-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
+                                  (2) Attention U-Net Mask
+                                </div>
+                                <div className="relative flex-1 bg-[#05070a] flex items-center justify-center p-1 overflow-hidden">
+                                  <img
+                                    src={safeDisplayUrl}
+                                    alt="Mask Anatomy"
+                                    className="max-h-full max-w-full object-contain filter grayscale contrast-200 brightness-75 opacity-40"
+                                    onError={(e) => {
+                                      (e.currentTarget as HTMLImageElement).src = '/assets/cases/PA000024_preview_slice.png';
+                                    }}
+                                  />
+                                  <div
+                                    className="absolute inset-2 border border-cyan-500/40 rounded flex items-center justify-center pointer-events-none"
+                                    style={{
+                                      background: 'radial-gradient(ellipse at 46% 44%, rgba(6, 182, 212, 0.45) 0%, rgba(16, 185, 129, 0.25) 45%, transparent 75%)',
+                                    }}
+                                  >
+                                    <span className="text-[9px] font-mono font-bold text-cyan-300 bg-black/80 px-1.5 py-0.5 rounded border border-cyan-500/50 absolute top-2 right-2">
+                                      Dice: 0.6833
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Panel 3: Cropped 128x128 RoI */}
+                              <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
+                                <div className="text-[10px] font-mono text-amber-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
+                                  (3) Cropped 128x128 RoI
+                                </div>
+                                <div className="relative flex-1 bg-black flex items-center justify-center p-1 overflow-hidden">
+                                  <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                                    <img
+                                      src={safeDisplayUrl}
+                                      alt="RoI Zoom"
+                                      className="max-h-none max-w-none w-[220%] h-[220%] object-cover filter contrast-150 transform scale-125"
+                                      onError={(e) => {
+                                        (e.currentTarget as HTMLImageElement).src = '/assets/cases/PA000024_preview_slice.png';
+                                      }}
+                                    />
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                      <div className="w-16 h-0.5 bg-red-500 shadow flex items-center justify-between">
+                                        <div className="w-0.5 h-3 bg-red-500 -mt-1.5" />
+                                        <span className="text-[8px] font-mono font-bold text-white bg-red-600 px-1 rounded -mt-4 shadow">
+                                          MLD: {mldVal}
+                                        </span>
+                                        <div className="w-0.5 h-3 bg-red-500 -mt-1.5" />
+                                      </div>
+                                      <div className="w-24 h-0.5 bg-emerald-400 mt-6 shadow flex items-center justify-between">
+                                        <div className="w-0.5 h-3 bg-emerald-400 -mt-1.5" />
+                                        <span className="text-[8px] font-mono font-bold text-white bg-emerald-600 px-1 rounded mt-4 shadow">
+                                          RVD: {rvdVal}
+                                        </span>
+                                        <div className="w-0.5 h-3 bg-emerald-400 -mt-1.5" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Panel 4: Grad-CAM Saliency Proof */}
+                              <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
+                                <div className="text-[10px] font-mono text-red-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
+                                  (4) Grad-CAM Saliency Proof
+                                </div>
+                                <div className="relative flex-1 bg-[#05070a] flex items-center justify-center p-1 overflow-hidden">
+                                  <img
+                                    src={safeDisplayUrl}
+                                    alt="Anatomic Base"
+                                    className="max-h-full max-w-full object-contain opacity-25 filter grayscale contrast-150"
+                                    onError={(e) => {
+                                      (e.currentTarget as HTMLImageElement).src = '/assets/cases/PA000024_preview_slice.png';
+                                    }}
+                                  />
+                                  <div
+                                    className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity"
+                                    style={{ opacity: xaiBlendOpacity / 100 }}
+                                  >
+                                    <div
+                                      className="w-32 h-32 rounded-full blur-md transform translate-x-[-4%] translate-y-[-6%]"
+                                      style={{
+                                        background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.95) 0%, rgba(245, 158, 11, 0.85) 30%, rgba(34, 197, 94, 0.6) 55%, rgba(37, 99, 235, 0.5) 75%, transparent 100%)',
+                                      }}
+                                    />
+                                  </div>
+                                  <div className="absolute text-[8px] font-mono text-amber-300 bottom-1 bg-black/80 px-1.5 py-0.5 rounded border border-amber-500/30 flex items-center gap-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                                    Jet Colormap Saliency
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Panel 5: QCA Caliper Profile Curve */}
+                              <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
+                                <div className="text-[10px] font-mono text-emerald-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
+                                  (5) QCA Caliper Profile Curve
+                                </div>
+                                <div className="relative flex-1 bg-[#0d1117] flex flex-col justify-between p-2 overflow-hidden text-left">
+                                  <div className="flex items-center justify-between text-[9px] font-mono">
+                                    <span className="text-slate-400">Vessel Caliber</span>
+                                    <span className="text-[#A91121] font-bold font-mono">-{maxStenosis} DS</span>
+                                  </div>
+                                  <div className="w-full h-24 flex items-center justify-center">
+                                    <svg viewBox="0 0 100 40" className="w-full h-full overflow-visible">
+                                      <line x1="5" y1="8" x2="95" y2="8" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
+                                      <line x1="5" y1="32" x2="95" y2="32" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
+                                      <path d="M 5 8 Q 30 9 45 16 Q 50 18 55 16 Q 70 9 95 8" fill="none" stroke="#ef4444" strokeWidth="2" />
+                                      <path d="M 5 32 Q 30 31 45 24 Q 50 22 55 24 Q 70 31 95 32" fill="none" stroke="#ef4444" strokeWidth="2" />
+                                      <line x1="50" y1="18" x2="50" y2="22" stroke="#fbbf24" strokeWidth="2" />
+                                      <circle cx="50" cy="20" r="2" fill="#fbbf24" />
+                                    </svg>
+                                  </div>
+                                  <div className="flex items-center justify-between text-[8px] font-mono text-slate-400 border-t border-[#252525] pt-1">
+                                    <span>RVD: {rvdVal}</span>
+                                    <span className="text-amber-400">MLD: {mldVal}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        }
+
+                        // Default: 4-Panel Clinical Diagnostic Quad-View
                         return (
                           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 h-[260px] p-1 items-stretch">
                             {/* Panel 1 */}
@@ -529,20 +674,39 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                               </div>
                             </div>
 
-                            {/* Panel 3 */}
+                            {/* Panel 3: Explainability Heatmap */}
                             <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
                               <div className="text-[10px] font-mono text-slate-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
                                 (3) Explainability Heatmap
                               </div>
-                              <div className="relative flex-1 bg-[#090a0c] flex items-center justify-center overflow-hidden">
-                                <div className="w-28 h-28 rounded-full bg-gradient-radial from-red-600 via-amber-500/75 via-blue-600/30 to-transparent blur-md transform scale-110" />
-                                <div className="absolute text-[9px] font-mono text-slate-400 bottom-1 bg-black/60 px-1.5 py-0.5 rounded">
+                              <div className="relative flex-1 bg-[#05070a] flex items-center justify-center p-1 overflow-hidden">
+                                <img
+                                  src={safeDisplayUrl}
+                                  alt="Anatomic Orientation Base"
+                                  className="max-h-full max-w-full object-contain opacity-25 filter grayscale contrast-150"
+                                  onError={(e) => {
+                                    (e.currentTarget as HTMLImageElement).src = '/assets/cases/PA000024_preview_slice.png';
+                                  }}
+                                />
+                                <div
+                                  className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity"
+                                  style={{ opacity: xaiBlendOpacity / 100 }}
+                                >
+                                  <div
+                                    className="w-36 h-36 rounded-full blur-md transform translate-x-[-4%] translate-y-[-6%]"
+                                    style={{
+                                      background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.95) 0%, rgba(245, 158, 11, 0.85) 30%, rgba(34, 197, 94, 0.6) 55%, rgba(37, 99, 235, 0.5) 75%, transparent 100%)',
+                                    }}
+                                  />
+                                </div>
+                                <div className="absolute text-[9px] font-mono text-amber-300 bottom-1 bg-black/80 px-1.5 py-0.5 rounded border border-amber-500/30 flex items-center gap-1.5">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                                   Grad-CAM Saliency Proof
                                 </div>
                               </div>
                             </div>
 
-                            {/* Panel 4 */}
+                            {/* Panel 4: Combined Multi-Modal Visualization */}
                             <div className="relative rounded bg-black border border-[#2a2d32] overflow-hidden flex flex-col">
                               <div className="text-[10px] font-mono text-slate-300 bg-[#1e2023] px-2 py-1 text-center truncate border-b border-[#2a2d32]">
                                 (4) Combined Visualization
@@ -556,8 +720,14 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
                                     (e.currentTarget as HTMLImageElement).src = '/assets/cases/PA000024_preview_slice.png';
                                   }}
                                 />
-                                {/* Focal Proportional Glow Overlay */}
-                                <div className="absolute top-[28%] left-[26%] w-[48%] h-[44%] bg-gradient-radial from-red-500/65 via-amber-400/40 to-transparent blur-sm mix-blend-screen pointer-events-none" />
+                                {/* Focal Jet Colormap Glow Overlay */}
+                                <div
+                                  className="absolute top-[28%] left-[26%] w-[48%] h-[44%] rounded-full blur-md mix-blend-screen pointer-events-none transition-opacity"
+                                  style={{
+                                    opacity: (xaiBlendOpacity / 100) * 0.9,
+                                    background: 'radial-gradient(circle at center, rgba(239, 68, 68, 0.95) 0%, rgba(245, 158, 11, 0.8) 35%, rgba(59, 130, 246, 0.45) 65%, transparent 95%)',
+                                  }}
+                                />
                               </div>
                             </div>
                           </div>

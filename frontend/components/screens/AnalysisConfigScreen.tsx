@@ -204,33 +204,49 @@ export const AnalysisConfigScreen: React.FC<AnalysisConfigScreenProps> = ({
               {[
                 {
                   name: 'StenoVision Ensemble v2.1',
-                  badge: 'Recommended (State of the Art)',
+                  badge: isLockedMode ? 'Clinical Production (Active)' : 'Recommended (State of the Art)',
                   desc: 'Attention-gated skip connections (Dice: 0.6833, IoU: 0.5356). Faster R-CNN localization & ResNet-18 severity classifier (29.8 FPS).',
+                  locked: false,
                 },
                 {
                   name: 'Baseline U-Net Caliper Suite v1.0',
-                  badge: 'Benchmark Baseline',
+                  badge: isLockedMode ? 'Restricted: Data Science Only' : 'Benchmark Baseline',
                   desc: 'Standard 4-level encoder-decoder U-Net (Dice: 0.6822, IoU: 0.5325, 37.6 FPS) with geometric EDT bottleneck extraction.',
+                  locked: isLockedMode,
                 },
                 {
                   name: 'ResNet-18 Severity Network v2.0',
-                  badge: 'Stenosis Specialist',
+                  badge: isLockedMode ? 'Restricted: Data Science Only' : 'Stenosis Specialist',
                   desc: 'Direct patch classifier & %DS continuous regressor (%DS MAE: 9.54%, Binary Acc: 87.43%, Severity Acc: 74.86%).',
+                  locked: isLockedMode,
                 },
               ].map((m) => (
                 <div
                   key={m.name}
-                  onClick={() => setModel(m.name)}
-                  className={`border rounded-xl p-4 cursor-pointer transition-all flex flex-col justify-between ${
-                    model === m.name
-                      ? 'border-[#A91121] bg-[#A91121]/5 shadow-sm ring-1 ring-[#A91121]'
-                      : 'border-[#A91121]/20 hover:border-[#A91121]/40 bg-white'
+                  onClick={() => {
+                    if (!m.locked) {
+                      setModel(m.name);
+                    }
+                  }}
+                  className={`border rounded-xl p-4 transition-all flex flex-col justify-between ${
+                    m.locked
+                      ? 'border-slate-200 bg-slate-50 opacity-60 cursor-not-allowed select-none'
+                      : model === m.name
+                      ? 'border-[#A91121] bg-[#A91121]/5 shadow-sm ring-1 ring-[#A91121] cursor-pointer'
+                      : 'border-[#A91121]/20 hover:border-[#A91121]/40 bg-white cursor-pointer'
                   }`}
                 >
                   <div>
-                    <span className="inline-block text-[10px] font-mono font-bold text-[#A91121] bg-red-50 border border-red-200 px-2 py-0.5 rounded mb-2">
-                      {m.badge}
-                    </span>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`inline-flex items-center gap-1 text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
+                        m.locked
+                          ? 'bg-slate-200 text-slate-700 border border-slate-300'
+                          : 'text-[#A91121] bg-red-50 border border-red-200'
+                      }`}>
+                        {m.locked && <Lock className="w-2.5 h-2.5 text-slate-600" />}
+                        {m.badge}
+                      </span>
+                    </div>
                     <div className="font-semibold text-xs text-[#252525] mb-1">{m.name}</div>
                     <div className="text-[11px] text-slate-500 leading-relaxed">{m.desc}</div>
                   </div>

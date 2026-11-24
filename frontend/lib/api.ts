@@ -8,7 +8,9 @@
 
 import { AnalysisReport, INITIAL_REPORTS } from './mockData';
 
-export const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').replace(/\/api\/v1\/?$/, '');
+export const API_BASE_URL = typeof window !== 'undefined'
+  ? ''
+  : (process.env.NEXT_PUBLIC_API_URL || 'http://backend:8000').replace(/\/api\/v1\/?$/, '');
 
 export interface UploadedScanPayload {
   file: File;

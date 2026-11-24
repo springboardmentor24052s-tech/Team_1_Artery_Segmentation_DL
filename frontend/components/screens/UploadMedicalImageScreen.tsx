@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { FileUpload } from '../FileUpload';
 import { FormInput } from '../FormInput';
-import { ArrowRight, ShieldCheck, CheckCircle2, Activity, FileCheck, ShieldAlert } from 'lucide-react';
+import { ArrowRight, ShieldCheck, CheckCircle2, Activity, FileCheck, ShieldAlert, Lock } from 'lucide-react';
 import { UploadedScanPayload } from '@/lib/api';
 import { SystemUser } from '@/lib/mockData';
+import { getModelConfigMode } from '@/lib/permissions';
 
 interface UploadMedicalImageScreenProps {
   onNavigate: (screen: string, caseId?: string) => void;
@@ -29,6 +30,8 @@ export const UploadMedicalImageScreen: React.FC<UploadMedicalImageScreenProps> =
 }) => {
   const isResearcher = currentUser?.role === 'Medical Researcher';
   const isClinician = currentUser?.role === 'Radiologist / Clinician';
+  const configMode = getModelConfigMode(currentUser?.role);
+  const isLockedMode = configMode === 'best-model-locked';
 
   const [patientId, setPatientId] = useState(isResearcher ? 'RES-89421' : 'PT-89421');
   const [patientName, setPatientName] = useState(isResearcher ? 'ANON-1010 [De-Identified]' : 'Eleanor Vance');
@@ -286,16 +289,45 @@ export const UploadMedicalImageScreen: React.FC<UploadMedicalImageScreenProps> =
               </div>
 
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-[#252525]">Diagnostic Analysis Model</label>
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-semibold text-[#252525]">Diagnostic Analysis Model</label>
+                  {isLockedMode ? (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                      <Lock className="w-3 h-3 text-emerald-700" /> Locked by Policy
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-blue-800 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                      <ShieldCheck className="w-3 h-3 text-blue-700" /> ML Engineering
+                    </span>
+                  )}
+                </div>
                 <select
-                  value={model}
-                  onChange={(e) => setModel(e.target.value)}
-                  className="w-full px-3.5 py-2 text-sm bg-white border border-[#A91121]/20 rounded-lg text-[#252525] focus:outline-none focus:border-[#A91121] focus:ring-2 focus:ring-[#A91121]/20 font-mono"
+                  value={isLockedMode ? 'StenoVision Ensemble v2.1' : model}
+                  onChange={(e) => !isLockedMode && setModel(e.target.value)}
+                  disabled={isLockedMode}
+                  className={`w-full px-3.5 py-2 text-sm rounded-lg font-mono transition-colors ${
+                    isLockedMode
+                      ? 'bg-slate-100 border border-slate-300 text-slate-700 cursor-not-allowed select-none opacity-90'
+                      : 'bg-white border border-[#A91121]/20 text-[#252525] focus:outline-none focus:border-[#A91121] focus:ring-2 focus:ring-[#A91121]/20'
+                  }`}
                 >
-                  <option value="StenoVision Ensemble v2.1">StenoVision Ensemble v2.1 (Recommended)</option>
-                  <option value="Baseline U-Net Caliper Suite v1.0">Baseline U-Net Caliper Suite v1.0</option>
-                  <option value="ResNet-18 Severity Network v2.0">ResNet-18 Severity Network v2.0</option>
+                  <option value="StenoVision Ensemble v2.1">StenoVision Ensemble v2.1 (Clinical Production)</option>
+                  {!isLockedMode && (
+                    <>
+                      <option value="Baseline U-Net Caliper Suite v1.0">Baseline U-Net Caliper Suite v1.0 (Candidate)</option>
+                      <option value="ResNet-18 Severity Network v2.0">ResNet-18 Severity Network v2.0 (Candidate)</option>
+                    </>
+                  )}
                 </select>
+                {isLockedMode ? (
+                  <p className="text-[10px] text-slate-500 leading-normal">
+                    Under hospital clinical governance, diagnostic reads are locked to verified production ensembles. Candidate model benchmarking is restricted to Data Scientists &amp; Lead Developers.
+                  </p>
+                ) : (
+                  <p className="text-[10px] text-blue-600 leading-normal">
+                    Authorized to select experimental or candidate neural networks for benchmarking against the production ensemble.
+                  </p>
+                )}
               </div>
             </div>
 
