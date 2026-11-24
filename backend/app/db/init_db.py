@@ -118,5 +118,7 @@ def init_db() -> None:
             else:
                 existing.role = p["role"]
                 existing.full_name = p["name"]
+                existing.hashed_password = get_password_hash(p["password"])
+                existing.is_active = True
         db.commit()
         logger.info("[DATABASE] Initialized schema and synchronized 5 platform personnel accounts.")
