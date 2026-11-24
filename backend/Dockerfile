@@ -27,10 +27,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Copy application source code
 COPY app /app/app
-COPY static /app/static
 
 # Create persistent storage and logging directories with proper permissions
-RUN mkdir -p /app/storage/raw /app/storage/masks /app/storage/xai /app/storage/reports /app/logs
+RUN mkdir -p /app/static/reports /app/static/uploads /app/static/xai /app/storage/raw /app/storage/masks /app/storage/xai /app/storage/reports /app/logs
 
 # Create non-root user for container security
 RUN adduser --disabled-password --gecos "" stenovision && \

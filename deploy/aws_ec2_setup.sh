@@ -150,9 +150,9 @@ if [ ! -f "docker-compose.yml" ]; then
   exit 1
 fi
 
-# Prepare persistent logs directory with correct permissions
-mkdir -p backend/logs
-chmod -R 777 backend/logs
+# Prepare persistent logs and static directories with correct permissions
+mkdir -p backend/logs backend/static/reports backend/static/uploads backend/static/xai
+chmod -R 777 backend/logs backend/static
 
 echo "[+] Building and launching StenoVision multi-container stack via Docker Compose..."
 docker compose build --parallel
