@@ -35,10 +35,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
     full_name: Mapped[str] = mapped_column(String(100))
     hashed_password: Mapped[str] = mapped_column(String(255))
-    role: Mapped[Role] = mapped_column(
-        Enum(Role, values_callable=lambda x: [m.value for m in x], native_enum=False),
-        default=Role.DATA_SCIENTIST,
-    )
+    role: Mapped[str] = mapped_column(String(60), default=Role.DATA_SCIENTIST.value)
     department: Mapped[str] = mapped_column(String(100), default="StenoVision AI Core")
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(

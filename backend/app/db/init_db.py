@@ -64,11 +64,11 @@ def _migrate_columns() -> None:
                 conn.execute(text("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT TRUE"))
             if "department" not in user_cols:
                 conn.execute(text("ALTER TABLE users ADD COLUMN department VARCHAR(100) DEFAULT 'Cardiovascular Research'"))
-            # Migrate legacy roles to the 4 official document roles
-            conn.execute(text("UPDATE users SET role = 'RADIOLOGIST_CLINICIAN' WHERE role IN ('SENIOR_RADIOLOGIST', 'radiologist', 'senior_radiologist', 'Radiologist / Clinician')"))
-            conn.execute(text("UPDATE users SET role = 'MEDICAL_RESEARCHER' WHERE role IN ('PRINCIPAL_INVESTIGATOR', 'principal_investigator', 'Medical Researcher')"))
-            conn.execute(text("UPDATE users SET role = 'DATA_SCIENTIST' WHERE role IN ('AI_RESEARCH_FELLOW', 'LAB_TECHNICIAN', 'ai_research_fellow', 'lab_technician', 'Data Scientist')"))
-            conn.execute(text("UPDATE users SET role = 'ADMINISTRATOR' WHERE role IN ('ADMIN', 'admin', 'Administrator')"))
+            # Migrate legacy roles to official platform display roles
+            conn.execute(text("UPDATE users SET role = 'Radiologist / Clinician' WHERE role IN ('SENIOR_RADIOLOGIST', 'radiologist', 'senior_radiologist', 'RADIOLOGIST_CLINICIAN')"))
+            conn.execute(text("UPDATE users SET role = 'Medical Researcher' WHERE role IN ('PRINCIPAL_INVESTIGATOR', 'principal_investigator', 'MEDICAL_RESEARCHER')"))
+            conn.execute(text("UPDATE users SET role = 'Data Scientist' WHERE role IN ('AI_RESEARCH_FELLOW', 'LAB_TECHNICIAN', 'ai_research_fellow', 'lab_technician', 'DATA_SCIENTIST')"))
+            conn.execute(text("UPDATE users SET role = 'Administrator' WHERE role IN ('ADMIN', 'admin', 'ADMINISTRATOR')"))
             conn.execute(text("DELETE FROM users WHERE email = 'l.vance@stenovision.org' OR email = 'admin@stenovision.com'"))
             conn.commit()
 

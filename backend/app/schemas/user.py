@@ -10,11 +10,11 @@ class UserCreate(BaseModel):
 
 
 class AdminUserCreate(UserCreate):
-    role: Role
+    role: str
 
 
 class RoleUpdate(BaseModel):
-    role: Role
+    role: str
 
 
 class UserRead(BaseModel):
@@ -23,7 +23,7 @@ class UserRead(BaseModel):
     id: int
     email: EmailStr
     full_name: str
-    role: Role
+    role: str
     is_active: bool
 
 
