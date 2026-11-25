@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { SystemUser } from '@/lib/mockData';
@@ -20,6 +20,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   currentUser,
   children,
 }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const getScreenTitle = () => {
     switch (currentScreen) {
       case 'dashboard':
@@ -68,6 +70,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         onNavigate={onNavigate}
         onLogout={onLogout}
         currentUser={currentUser}
+        isMobileOpen={mobileMenuOpen}
+        onCloseMobile={() => setMobileMenuOpen(false)}
       />
 
       {/* Main Content Area */}
@@ -76,10 +80,11 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
           currentScreenTitle={getScreenTitle()}
           currentUser={currentUser}
           onLogout={onLogout}
+          onOpenMobileMenu={() => setMobileMenuOpen(true)}
         />
 
-        <main className="flex-1 overflow-y-auto p-8 relative">
-          <div className="max-w-7xl mx-auto space-y-8">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 relative">
+          <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
             {children}
           </div>
         </main>

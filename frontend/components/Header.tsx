@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { ChevronDown, Shield, Stethoscope, Cpu, ShieldCheck, Terminal, LogOut, Lock, User as UserIcon } from 'lucide-react';
+import { ChevronDown, Shield, Stethoscope, Cpu, ShieldCheck, Terminal, LogOut, Lock, Menu, User as UserIcon } from 'lucide-react';
 import { SystemUser } from '@/lib/mockData';
 import { UserRole } from '@/lib/permissions';
 import { UserAvatar } from './UserAvatar';
@@ -11,6 +11,7 @@ interface HeaderProps {
   currentScreenTitle: string;
   currentUser: SystemUser;
   onLogout?: () => void;
+  onOpenMobileMenu?: () => void;
   headerBadge?: React.ReactNode;
   headerActions?: React.ReactNode;
 }
@@ -19,6 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   currentScreenTitle,
   currentUser,
   onLogout,
+  onOpenMobileMenu,
   headerBadge,
   headerActions,
 }) => {
@@ -71,10 +73,20 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="h-16 bg-white border-b border-[#A91121]/20 px-6 sm:px-8 flex items-center justify-between shrink-0 shadow-sm relative z-30">
-      {/* Title Zone with Standalone Emblem */}
-      <div className="flex items-center gap-4">
-        <div className="relative w-10 h-10 rounded-xl bg-white border border-[#A91121]/20 flex items-center justify-center p-0.5 shadow-sm shrink-0 overflow-hidden">
+    <header className="h-16 bg-white border-b border-[#A91121]/20 px-4 sm:px-8 flex items-center justify-between gap-2 shrink-0 shadow-sm relative z-30">
+      {/* Title Zone with Mobile Menu Trigger & Standalone Emblem */}
+      <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+        {onOpenMobileMenu && (
+          <button
+            type="button"
+            onClick={onOpenMobileMenu}
+            className="md:hidden p-2 -ml-1 rounded-lg text-slate-600 hover:text-[#A91121] hover:bg-red-50 border border-slate-200 transition-colors shrink-0"
+            aria-label="Open navigation menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
+        <div className="relative hidden sm:flex w-10 h-10 rounded-xl bg-white border border-[#A91121]/20 items-center justify-center p-0.5 shadow-sm shrink-0 overflow-hidden">
           <Image
             src="/assets/aistudio/image_39582843.png"
             alt="StenoVision Emblem"
@@ -83,8 +95,8 @@ export const Header: React.FC<HeaderProps> = ({
             referrerPolicy="no-referrer"
           />
         </div>
-        <div className="flex items-center gap-2.5">
-          <h1 className="text-base font-bold text-[#252525] tracking-tight">{currentScreenTitle}</h1>
+        <div className="flex items-center gap-2.5 min-w-0">
+          <h1 className="text-sm sm:text-base font-bold text-[#252525] tracking-tight truncate">{currentScreenTitle}</h1>
           {headerBadge}
         </div>
       </div>

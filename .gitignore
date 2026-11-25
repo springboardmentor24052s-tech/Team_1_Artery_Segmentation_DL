@@ -62,3 +62,11 @@ docs/reports/
 # Binary deep learning weights exceeding GitHub 100MB limit
 *.pth
 *.pt
+
+# SSL certificates & ACME challenge files
+deploy/nginx/ssl/*.crt
+deploy/nginx/ssl/*.key
+deploy/nginx/ssl/*.pem
+deploy/nginx/certbot/*
+!deploy/nginx/certbot/.gitkeep
+!deploy/nginx/ssl/.gitkeep
