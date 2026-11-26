@@ -83,7 +83,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
     rawFilename.includes('60') ? 'PT-6000' :
     rawFilename.includes('110') ? 'PT-1100' :
     rawFilename.includes('175') ? 'PT-1750' :
-    (rawFilename.includes('10') && !rawFilename.includes('PA')) ? 'PT-89421' : `PT-${rawFilename.replace(/\D/g, '').slice(-4) || 'LIVE'}`
+    (rawFilename.includes('10') && !rawFilename.includes('PA')) ? 'PT-89421' : `PT-${rawFilename.replace(/\D/g, '').slice(-4) || 'SCAN'}`
   );
 
   // Interactive QCA Caliper Simulator state
@@ -394,7 +394,7 @@ export const AnalysisResultsScreen: React.FC<AnalysisResultsScreenProps> = ({
               Artery Mask & Skeleton
             </button>
           </div>
-          <span className="text-xs font-mono text-slate-500">Live AI Verification Engine</span>
+          <span className="text-xs font-mono text-slate-500">AI Verification Engine</span>
         </div>
 
         <div className="min-h-96">

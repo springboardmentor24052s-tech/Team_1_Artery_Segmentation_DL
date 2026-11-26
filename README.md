@@ -33,16 +33,16 @@ Our team designed and implemented an end-to-end clinical assistant that:
 
 Everything you see in this repository — from data preprocessing and neural network architectures to backend microservices, frontend workstation UI, automated test suites, and Docker deployment — was built from the ground up by our team:
 
-| # | Team Member | Primary Role & Contributions |
-| :-: | :--- | :--- |
-| **1** | **Sathiyamoorthi K** | **Lead System Architect & Backend Integration**<br>Full-stack architecture, unified inference pipeline, database schema, and microservice integration |
-| **2** | **Anwesha Singh** | **Medical Image Preprocessing & Ingestion**<br>CLAHE contrast normalization, multi-modality loaders (DICOM & 3D NIfTI), and dataset curation |
-| **3** | **Aditya Ghadi** | **Coronary Artery Segmentation Lead**<br>Baseline U-Net and Attention U-Net architectures, spatial attention gates, and hybrid Dice-BCE loss functions |
-| **4** | **Asjad Imam** | **Vessel Morphometry & Centerline Analysis**<br>Zhang-Suen centerline skeletonization, normal ray projection, and vessel caliber profile calculation |
-| **5** | **Anshu Jain** | **Stenosis Detection Engine**<br>Faster R-CNN candidate lesion detection, bounding box regression, and anchor box optimization |
-| **6** | **Stephen Raj** | **Stenosis Severity Classification**<br>Multi-task ResNet-18 classifier, ACC/AHA clinical grading (Mild/Mod/Sev/Crit), and hemodynamic risk scoring |
-| **7** | **Palavalasa Bhavana** | **Quantitative Coronary Angiography (QCA Calipers)**<br>Lumen diameter profile $D(s)$, MLD and RVD estimation, and dual-anchor caliper mathematics |
-| **8** | **Rentamallu Lakshmi Sravya** | **Explainable AI (XAI) & Attribution**<br>Masked intraluminal Grad-CAM and Grad-CAM++ saliency heatmaps, ensuring visual trust for clinicians |
+| # | Team Member |
+| :-: | :--- |
+| **1** | **Sathiyamoorthi K** |
+| **2** | **Anwesha Singh** |
+| **3** | **Aditya Ghadi** |
+| **4** | **Asjad Imam** |
+| **5** | **Anshu Jain** |
+| **6** | **Stephen Raj** |
+| **7** | **Palavalasa Bhavana** |
+| **8** | **Rentamallu Lakshmi Sravya** |
 
 ---
 

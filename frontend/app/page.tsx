@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '@/components/MainLayout';
+import { LandingPage } from '@/components/screens/LandingPage';
 import { LoginScreen } from '@/components/screens/LoginScreen';
 import { DashboardScreen } from '@/components/screens/DashboardScreen';
 import { CaseManagementScreen } from '@/components/screens/CaseManagementScreen';
@@ -19,6 +20,7 @@ import { ShieldAlert, ArrowLeft } from 'lucide-react';
 
 export default function Page() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [unauthView, setUnauthView] = useState<'landing' | 'login'>('landing');
   const [currentUser, setCurrentUser] = useState<SystemUser>(
     INITIAL_USERS.find(u => u.role === 'Radiologist / Clinician') || INITIAL_USERS[0]
   );
@@ -69,6 +71,7 @@ export default function Page() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    setUnauthView('landing');
     try {
       localStorage.removeItem('stenovision_active_user');
       localStorage.removeItem('stenovision_token');
@@ -79,10 +82,14 @@ export default function Page() {
   };
 
   if (!isAuthenticated) {
+    if (unauthView === 'landing') {
+      return <LandingPage onEnterLogin={() => setUnauthView('login')} />;
+    }
     return (
       <LoginScreen
         onLogin={handleLogin}
         allUsers={INITIAL_USERS}
+        onBackToLanding={() => setUnauthView('landing')}
       />
     );
   }

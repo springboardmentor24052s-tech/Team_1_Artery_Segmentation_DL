@@ -157,7 +157,7 @@ export const REGISTERED_MODELS: RegisteredModel[] = [
     parameters: '65.32M',
     weightsFile: 'ensemble_manifest.json',
     weightsSizeMb: 296.4,
-    releaseMilestone: 'Clinical Production v2.1',
+    releaseMilestone: 'Cascade Release v2.1',
     status: 'Recommended Pipeline',
     isActive: true,
     dice: 0.6833,
@@ -609,7 +609,7 @@ export const ModelComparisonView: React.FC<ModelComparisonViewProps> = ({ curren
                           <span>{m.throughputFps} FPS</span>
                         </div>
                         {m.id === 'MOD-200' ? (
-                          <div className="text-[10px] font-semibold text-[#A91121] bg-red-50 dark:bg-red-950/40 px-1.5 py-0.5 rounded border border-red-200 dark:border-red-900/40">
+                          <div className="text-[10px] font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                             MAE: 9.54% • Diagnostic Head
                           </div>
                         ) : (

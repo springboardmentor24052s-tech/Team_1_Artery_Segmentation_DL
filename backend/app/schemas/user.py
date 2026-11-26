@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 from app.models.user import Role
@@ -25,6 +27,28 @@ class UserRead(BaseModel):
     full_name: str
     role: str
     is_active: bool
+    last_login_at: datetime | None = None
+
+
+class LoginAuditEntry(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    user_id: int | None
+    full_name: str | None = None
+    user_role: str
+    attempted_email_masked: str
+    outcome: str
+    client_ip: str
+    user_agent: str
+    request_id: str | None
+    created_at: datetime
+
+
+class UserAuditResponse(BaseModel):
+    total_events: int
+    active_users: list[UserRead]
+    recent_logins: list[LoginAuditEntry]
 
 
 class Token(BaseModel):

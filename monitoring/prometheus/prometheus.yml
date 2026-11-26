@@ -1,5 +1,5 @@
 # ==============================================================================
-# StenoVision - Prometheus Scraper Configuration
+# StenoVision - Prometheus Scraper & Alert Rules Configuration
 # Milestone 4: Operational Monitoring & Performance Metrics
 # ==============================================================================
 
@@ -7,6 +7,9 @@ global:
   scrape_interval: 10s
   evaluation_interval: 10s
   scrape_timeout: 5s
+
+rule_files:
+  - "/etc/prometheus/alerts.yml"
 
 scrape_configs:
   # 1. FastAPI REST Microservice & Deep Learning Engine

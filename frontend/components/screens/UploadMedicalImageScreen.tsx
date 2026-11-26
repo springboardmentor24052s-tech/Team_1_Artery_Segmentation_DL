@@ -33,18 +33,18 @@ export const UploadMedicalImageScreen: React.FC<UploadMedicalImageScreenProps> =
   const configMode = getModelConfigMode(currentUser?.role);
   const isLockedMode = configMode === 'best-model-locked';
 
-  const [patientId, setPatientId] = useState(isResearcher ? 'RES-89421' : 'PT-89421');
-  const [patientName, setPatientName] = useState(isResearcher ? 'ANON-1010 [De-Identified]' : 'Eleanor Vance');
-  const [age, setAge] = useState('62');
+  const [patientId, setPatientId] = useState('');
+  const [patientName, setPatientName] = useState('');
+  const [age, setAge] = useState('');
   const [gender, setGender] = useState('Female');
   const [scanType, setScanType] = useState('XCA (Coronary Angiogram)');
   const [model, setModel] = useState('StenoVision Ensemble v2.1');
-  const [notes, setNotes] = useState('ARCADE benchmark angiogram for stenosis detection and QCA morphometric profiling.');
-  const [file, setFile] = useState<File | null>(() => new File(['benchmark_10'], '10.png', { type: 'image/png' }));
+  const [notes, setNotes] = useState('');
+  const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState(false);
-  const [selectedPreset, setSelectedPreset] = useState<string>('10');
-  const [customPreviewUrl, setCustomPreviewUrl] = useState<string>('/assets/cases/10.png');
+  const [selectedPreset, setSelectedPreset] = useState<string>('');
+  const [customPreviewUrl, setCustomPreviewUrl] = useState<string>('');
 
   const handleSelectPreset = (preset: typeof BENCHMARK_PRESETS[0]) => {
     setSelectedPreset(preset.id);
@@ -146,7 +146,7 @@ export const UploadMedicalImageScreen: React.FC<UploadMedicalImageScreenProps> =
           {isResearcher
             ? 'Upload multi-center study scans or trial cohorts. All records are automatically assigned de-identified subject IDs in compliance with HIPAA Safe Harbor regulations.'
             : isClinician
-            ? 'Upload 2D X-Ray Coronary Angiography (XCA) or 3D CCTA scans (DICOM / NIfTI) for immediate QCA caliper profiling and lesion severity grading via the active production pipeline.'
+            ? 'Upload 2D X-Ray Coronary Angiography (XCA) or 3D CCTA scans (DICOM / NIfTI) for immediate QCA caliper profiling and lesion severity grading via the active analysis pipeline.'
             : 'Upload 2D X-Ray Coronary Angiography (XCA) or 3D Volumetric CTPA / CCTA scans (NIfTI / DICOM) for deep learning vessel segmentation, 3D MPR slice extraction, and stenosis grading.'}
         </p>
       </div>
@@ -311,7 +311,7 @@ export const UploadMedicalImageScreen: React.FC<UploadMedicalImageScreenProps> =
                       : 'bg-white border border-[#A91121]/20 text-[#252525] focus:outline-none focus:border-[#A91121] focus:ring-2 focus:ring-[#A91121]/20'
                   }`}
                 >
-                  <option value="StenoVision Ensemble v2.1">StenoVision Ensemble v2.1 (Clinical Production)</option>
+                  <option value="StenoVision Ensemble v2.1">StenoVision Ensemble v2.1 (Default)</option>
                   {!isLockedMode && (
                     <>
                       <option value="Baseline U-Net Caliper Suite v1.0">Baseline U-Net Caliper Suite v1.0 (Candidate)</option>
@@ -321,11 +321,11 @@ export const UploadMedicalImageScreen: React.FC<UploadMedicalImageScreenProps> =
                 </select>
                 {isLockedMode ? (
                   <p className="text-[10px] text-slate-500 leading-normal">
-                    Under hospital clinical governance, diagnostic reads are locked to verified production ensembles. Candidate model benchmarking is restricted to Data Scientists &amp; Lead Developers.
+                    Under hospital clinical governance, diagnostic reads are locked to verified baseline ensembles. Candidate model benchmarking is restricted to Data Scientists &amp; Lead Developers.
                   </p>
                 ) : (
                   <p className="text-[10px] text-blue-600 leading-normal">
-                    Authorized to select experimental or candidate neural networks for benchmarking against the production ensemble.
+                    Authorized to select experimental or candidate neural networks for benchmarking against the baseline ensemble.
                   </p>
                 )}
               </div>

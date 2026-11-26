@@ -41,7 +41,7 @@ DL_INFERENCE_DURATION_SECONDS = Histogram(
     buckets=[0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0, 2.0, 5.0],
 )
 
-# 3. Clinical Application Gauges
+# 3. Clinical Application & Auth Gauges/Counters
 ACTIVE_CASES_TOTAL = Gauge(
     "stenovision_active_cases_total",
     "Current volume of active coronary angiography cases in registry",
@@ -53,11 +53,32 @@ PROCESSED_ANGIOGRAMS_TOTAL = Counter(
     ["modality"],
 )
 
+AUTH_LOGINS_TOTAL = Counter(
+    "stenovision_auth_logins_total",
+    "Total authentication login attempts categorized by role and outcome",
+    ["role", "outcome"],
+)
+
 # 4. System & Hardware Acceleration State
 HARDWARE_INFO = Info(
     "stenovision_hardware_execution",
     "Underlying hardware acceleration mode and PyTorch compute device",
 )
+
+PIPELINE_READY = Gauge(
+    "stenovision_pipeline_ready",
+    "Whether the deep learning pipeline weights are loaded (1=ready, 0=degraded)",
+)
+
+
+def sync_active_cases_gauge(db) -> int:
+    """Queries non-archived case count from PostgreSQL and updates ACTIVE_CASES_TOTAL."""
+    from app.models.case import Case, CaseStatus
+
+    count = db.query(Case).filter(Case.status != CaseStatus.ARCHIVED).count()
+    ACTIVE_CASES_TOTAL.set(count)
+    return count
+
 
 def initialize_hardware_info():
     """Records initial device execution environment into Prometheus Info metric."""

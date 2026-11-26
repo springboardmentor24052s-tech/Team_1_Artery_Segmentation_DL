@@ -38,6 +38,9 @@ class User(Base):
     role: Mapped[str] = mapped_column(String(60), default=Role.DATA_SCIENTIST.value)
     department: Mapped[str] = mapped_column(String(100), default="StenoVision AI Core")
     is_active: Mapped[bool] = mapped_column(default=True)
+    last_login_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), default=None
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )

@@ -5,12 +5,19 @@ version: "3.8"
 # Milestone 4: Dockerization, Monitoring, Logging & Gateway Orchestration
 # ==============================================================================
 
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   # 1. Reverse Proxy Gateway: Nginx
   nginx:
     image: nginx:1.25-alpine
     container_name: stenovision_nginx
     restart: unless-stopped
+    logging: *default-logging
     ports:
       - "80:80"
       - "443:443"
@@ -19,6 +26,7 @@ services:
       - ./deploy/nginx/proxy_routes.conf:/etc/nginx/proxy_routes.conf:ro
       - ./deploy/nginx/ssl:/etc/nginx/ssl:ro
       - ./deploy/nginx/certbot:/var/www/certbot:ro
+      - nginx_logs:/var/log/nginx
     depends_on:
       - frontend
       - backend
@@ -35,6 +43,7 @@ services:
     image: postgres:15-alpine
     container_name: stenovision_postgres
     restart: unless-stopped
+    logging: *default-logging
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -59,6 +68,7 @@ services:
       dockerfile: Dockerfile
     container_name: stenovision_backend
     restart: unless-stopped
+    logging: *default-logging
     environment:
       PROJECT_NAME: "StenoVision Artery Analysis Engine"
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/stenovision_db
@@ -74,6 +84,7 @@ services:
       - backend_storage:/app/storage
       - backend_logs:/app/logs
       - ./backend/static:/app/static
+      - ./frontend/public/assets:/app/frontend/public/assets:ro
       - ./stenosis:/app/stenosis:ro
       - ./segmentation:/app/segmentation:ro
       - ./preprocessing:/app/preprocessing:ro
@@ -94,6 +105,7 @@ services:
       dockerfile: Dockerfile
     container_name: stenovision_frontend
     restart: unless-stopped
+    logging: *default-logging
     environment:
       NEXT_PUBLIC_API_URL: http://backend:8000
       PORT: 3000
@@ -115,10 +127,12 @@ services:
     image: prom/prometheus:v2.45.0
     container_name: stenovision_prometheus
     restart: unless-stopped
+    logging: *default-logging
     ports:
       - "9090:9090"
     volumes:
       - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
       - prometheus_data:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
@@ -141,6 +155,7 @@ services:
     image: grafana/grafana:10.0.0
     container_name: stenovision_grafana
     restart: unless-stopped
+    logging: *default-logging
     ports:
       - "3001:3000"
     environment:
@@ -172,6 +187,8 @@ volumes:
   backend_storage:
     driver: local
   backend_logs:
+    driver: local
+  nginx_logs:
     driver: local
   prometheus_data:
     driver: local

@@ -7,10 +7,12 @@ from fastapi.staticfiles import StaticFiles
 
 from app.api.routes import analysis, auth, case_images, cases, models, reports, users
 from app.core.config import settings
-from app.core.logging_config import setup_logging
-from app.core.metrics import get_metrics_response
+from app.core.logging_config import LOG_DIR, setup_logging
+from app.core.metrics import PIPELINE_READY, get_metrics_response, sync_active_cases_gauge
 from app.core.middleware import ObservabilityMiddleware
 from app.db.init_db import init_db
+from app.db.session import SessionLocal
+from sqlalchemy import text
 
 # Initialize structured logging engine with HIPAA sanitization
 logger = setup_logging()
@@ -19,10 +21,17 @@ logger = setup_logging()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
+    with SessionLocal() as db:
+        try:
+            sync_active_cases_gauge(db)
+        except Exception as e:
+            logger.warning(f"[METRICS] Failed initial active cases sync: {e}")
     try:
         from app.api.routes.analysis import get_pipeline
         get_pipeline()
+        PIPELINE_READY.set(1)
     except Exception as e:
+        PIPELINE_READY.set(0)
         logger.warning(f"[PIPELINE] Warmup warning: {e}")
     yield
 
@@ -73,12 +82,38 @@ app.include_router(models.router, prefix="/api/v1/models", tags=["Model Manageme
 
 @app.get("/health", tags=["Health"])
 def health_check():
+    import os
     import torch
+
     has_cuda = torch.cuda.is_available()
     device = torch.cuda.get_device_name(0) if has_cuda else "CPU Host"
+
+    db_status = "ok"
+    try:
+        with SessionLocal() as db:
+            db.execute(text("SELECT 1"))
+    except Exception as exc:
+        db_status = f"error: {exc}"
+        logger.error(f"[HEALTH] PostgreSQL check failed: {exc}")
+
+    log_dir_writable = os.access(LOG_DIR, os.W_OK)
+
+    pipeline_ready = False
+    try:
+        from app.api.routes.analysis import _diagnostic_pipeline
+        pipeline_ready = _diagnostic_pipeline is not None
+    except Exception:
+        pipeline_ready = False
+    PIPELINE_READY.set(1 if pipeline_ready else 0)
+
     return {
-        "status": "ok",
+        "status": "ok" if db_status == "ok" else "degraded",
         "project": "StenoVision Artery Analysis Engine",
+        "dependencies": {
+            "database": db_status,
+            "log_dir_writable": log_dir_writable,
+            "pipeline_ready": pipeline_ready,
+        },
         "hardware_acceleration": {
             "mode": "CUDA_GPU" if has_cuda else "CPU",
             "device": device,

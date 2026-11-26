@@ -686,3 +686,58 @@ export async function deployModel(modelId: string, userRole?: string): Promise<a
   }
 }
 
+export interface LoginAuditEntry {
+  id: number;
+  user_id: number | null;
+  full_name: string | null;
+  user_role: string;
+  attempted_email_masked: string;
+  outcome: string;
+  client_ip: string;
+  user_agent: string;
+  request_id: string | null;
+  created_at: string;
+}
+
+export interface UserAuditRecord {
+  id: number;
+  email: string;
+  full_name: string;
+  role: string;
+  is_active: boolean;
+  last_login_at: string | null;
+}
+
+export interface UserAuditResponse {
+  total_events: number;
+  active_users: UserAuditRecord[];
+  recent_logins: LoginAuditEntry[];
+}
+
+/**
+ * Fetches all-user login audit history & last_login_at roster (Administrator / Developer only).
+ */
+export async function fetchUserAudit(limit = 50): Promise<UserAuditResponse | null> {
+  try {
+    const token =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('stenovision_token') || localStorage.getItem('stenovision_jwt_token')
+        : null;
+    const headers: Record<string, string> = { Accept: 'application/json' };
+    if (token && token !== 'demo_clinical_jwt_session') {
+      headers.Authorization = `Bearer ${token}`;
+    }
+    const res = await fetch(`${API_BASE_URL}/api/v1/users/audit?limit=${limit}`, {
+      method: 'GET',
+      headers,
+    });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    console.warn('API /api/v1/users/audit unavailable:', err);
+    return null;
+  }
+}
+

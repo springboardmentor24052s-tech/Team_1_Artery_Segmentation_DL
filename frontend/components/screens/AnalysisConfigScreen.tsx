@@ -102,7 +102,7 @@ export const AnalysisConfigScreen: React.FC<AnalysisConfigScreenProps> = ({
           </h2>
           <p className="text-xs text-slate-500">
             {isLockedMode
-              ? 'Executing automated coronary evaluation using the active production model selected by the Data Science team'
+              ? 'Executing automated coronary evaluation using the active baseline model selected by the Data Science team'
               : 'Configure neural network architectures, QCA caliper thresholding, and model benchmarks'}
           </p>
         </div>
@@ -137,7 +137,7 @@ export const AnalysisConfigScreen: React.FC<AnalysisConfigScreenProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-emerald-950 text-sm">Active Production Model: Cascade v2.1</h3>
+                <h3 className="font-bold text-emerald-950 text-sm">Active Default Model: Cascade v2.1</h3>
                 <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-200 text-emerald-900 border border-emerald-300">
                   RECOMMENDED SOTA
                 </span>
@@ -204,7 +204,7 @@ export const AnalysisConfigScreen: React.FC<AnalysisConfigScreenProps> = ({
               {[
                 {
                   name: 'StenoVision Ensemble v2.1',
-                  badge: isLockedMode ? 'Clinical Production (Active)' : 'Recommended (State of the Art)',
+                  badge: isLockedMode ? 'Clinical Default (Active)' : 'Recommended (State of the Art)',
                   desc: 'Attention-gated skip connections (Dice: 0.6833, IoU: 0.5356). Faster R-CNN localization & ResNet-18 severity classifier (29.8 FPS).',
                   locked: false,
                 },

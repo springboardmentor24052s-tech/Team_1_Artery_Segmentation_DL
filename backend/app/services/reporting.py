@@ -32,13 +32,17 @@ from reportlab.platypus import (
     TableStyle,
 )
 
-# Project paths
+# Project paths (handles both local repo layout and Docker /app/app/services layout)
 SERVICE_DIR = Path(__file__).resolve().parent
 BACKEND_DIR = SERVICE_DIR.parent.parent
 STENOVISION_DIR = BACKEND_DIR.parent
 STATIC_REPORTS_DIR = BACKEND_DIR / "static" / "reports"
 STATIC_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-ASSETS_DIR = STENOVISION_DIR / "frontend" / "public" / "assets"
+_CANDIDATE_ASSETS_DIRS = [
+    BACKEND_DIR / "frontend" / "public" / "assets",
+    STENOVISION_DIR / "frontend" / "public" / "assets",
+]
+ASSETS_DIR = next((p for p in _CANDIDATE_ASSETS_DIRS if p.exists()), _CANDIDATE_ASSETS_DIRS[-1])
 
 BRAND_CRIMSON = colors.HexColor("#A91121")
 BRAND_NAVY = colors.HexColor("#1A365D")
@@ -943,9 +947,15 @@ class ClinicalReportService:
         # =====================================================================
         story.append(Paragraph("4. MULTI-PANEL DEEP LEARNING VISUAL DIAGNOSTIC PROOF GALLERY", style_sec_head))
         img_key = report_data.get("image_key", "10")
-        four_panel_path = ASSETS_DIR / "cases" / f"{img_key}_4panel_severity.png"
-        if not four_panel_path.exists():
-            four_panel_path = ASSETS_DIR / "cases" / "sample_4panel_xai.png"
+        candidates = [
+            ASSETS_DIR / "cases" / f"{img_key}_4panel_severity.png",
+            ASSETS_DIR / "cases" / f"{img_key}_4panel_xai.png",
+            ASSETS_DIR / "cases" / f"{img_key}_5panel_detection.png",
+            ASSETS_DIR / "cases" / f"{img_key}_4panel.png",
+            ASSETS_DIR / "cases" / f"{img_key}_preview_slice.png",
+            ASSETS_DIR / "cases" / "10_4panel_severity.png",
+        ]
+        four_panel_path = next((p for p in candidates if p.exists()), candidates[0])
 
         if four_panel_path.exists():
             try:

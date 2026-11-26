@@ -57,11 +57,17 @@ class StructuredJsonFormatter(logging.Formatter):
             "line": record.lineno,
         }
 
-        # Include request tracing context if attached
+        # Include request & user tracing context if attached
         if hasattr(record, "request_id"):
             log_entry["request_id"] = record.request_id
         if hasattr(record, "client_ip"):
             log_entry["client_ip"] = record.client_ip
+        if hasattr(record, "user_id") and record.user_id is not None:
+            log_entry["user_id"] = record.user_id
+        if hasattr(record, "user_role") and record.user_role is not None:
+            log_entry["user_role"] = record.user_role
+        if hasattr(record, "auth_outcome") and record.auth_outcome is not None:
+            log_entry["auth_outcome"] = record.auth_outcome
         if hasattr(record, "method"):
             log_entry["method"] = record.method
         if hasattr(record, "path"):

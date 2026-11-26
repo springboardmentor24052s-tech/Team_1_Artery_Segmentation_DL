@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Query, status
 
 from app.api.case_deps import AccessibleCase, AdminUser, CaseWriter
 from app.api.deps import CurrentUser, DbSession
+from app.core.metrics import sync_active_cases_gauge
 from app.crud import case as case_crud
 from app.models.case import CaseStatus
 from app.models.user import Role, User
@@ -21,7 +22,9 @@ def _validate_patient(db: DbSession, patient_id: int | None) -> None:
 @router.post("/", response_model=CaseRead, status_code=status.HTTP_201_CREATED)
 def create_case(payload: CaseCreate, db: DbSession, user: CaseWriter):
     _validate_patient(db, payload.patient_id)
-    return case_crud.create_case(db, data=payload, created_by=user)
+    created = case_crud.create_case(db, data=payload, created_by=user)
+    sync_active_cases_gauge(db)
+    return created
 
 
 @router.get("/", response_model=CaseList)
@@ -64,3 +67,4 @@ def update_case(payload: CaseUpdate, case: AccessibleCase, db: DbSession, _user:
 @router.delete("/{case_id}", status_code=status.HTTP_204_NO_CONTENT)
 def archive_case(case: AccessibleCase, db: DbSession, _admin: AdminUser) -> None:
     case_crud.archive_case(db, case)
+    sync_active_cases_gauge(db)

@@ -1,0 +1,53 @@
+# ==============================================================================
+# StenoVision - Prometheus Operational Alerting Rules
+# Milestone 4: Service Availability, Error Rate & Latency SLA Alerts
+# ==============================================================================
+
+groups:
+  - name: stenovision_operational_alerts
+    interval: 30s
+    rules:
+      - alert: StenoVisionBackendDown
+        expr: up{job="stenovision-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: stenovision-backend
+        annotations:
+          summary: "StenoVision FastAPI backend target is unreachable"
+          description: "Prometheus cannot scrape backend:8000/metrics for more than 1 minute."
+
+      - alert: StenoVisionHigh5xxErrorRate
+        expr: >
+          (
+            sum(rate(stenovision_http_requests_total{status_code=~"5.."}[5m]))
+            /
+            clamp_min(sum(rate(stenovision_http_requests_total[5m])), 0.001)
+          ) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+          service: stenovision-backend
+        annotations:
+          summary: "HTTP 5xx error rate exceeds 5% over 5 minutes"
+          description: "FastAPI backend 5xx error ratio is above the 5% threshold."
+
+      - alert: StenoVisionHighRequestLatencyP95
+        expr: histogram_quantile(0.95, sum(rate(stenovision_request_duration_seconds_bucket[5m])) by (le)) > 2.0
+        for: 3m
+        labels:
+          severity: warning
+          service: stenovision-backend
+        annotations:
+          summary: "API p95 request latency exceeds 2.0s SLA"
+          description: "End-to-end API response p95 latency exceeded 2.0 seconds for 3 minutes."
+
+      - alert: StenoVisionSlowDLInferenceP95
+        expr: histogram_quantile(0.95, sum(rate(stenovision_dl_inference_duration_seconds_bucket[5m])) by (le)) > 3.0
+        for: 3m
+        labels:
+          severity: warning
+          service: stenovision-dl
+        annotations:
+          summary: "Deep learning inference p95 duration exceeds 3.0s"
+          description: "DL pipeline p95 execution exceeded 3.0 seconds."

@@ -6,15 +6,25 @@ Exposes the frozen Milestone 2 (Attention U-Net) and Milestone 3
 to the frontend Next.js interface.
 """
 
+import logging
 import os
 import shutil
 import sys
+import time
 import uuid
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, File, HTTPException, Request, UploadFile, status
 from pydantic import BaseModel
+
+from app.core.metrics import (
+    DL_INFERENCE_DURATION_SECONDS,
+    PIPELINE_READY,
+    PROCESSED_ANGIOGRAMS_TOTAL,
+)
+
+logger = logging.getLogger("stenovision.analysis")
 
 # Resolve project paths
 API_ROUTE_DIR = Path(__file__).resolve().parent
@@ -79,7 +89,7 @@ class DiagnosticResponse(BaseModel):
 
 
 @router.post("/predict", response_model=DiagnosticResponse, status_code=status.HTTP_200_OK)
-def analyze_angiogram(file: UploadFile = File(...)):
+def analyze_angiogram(request: Request, file: UploadFile = File(...)):
     """
     Accepts an XCA coronary angiogram image or 3D NIfTI volume (.nii/.nii.gz),
     executes the full end-to-end segmentation, stenosis detection, QCA, and Grad-CAM
@@ -126,13 +136,20 @@ def analyze_angiogram(file: UploadFile = File(...)):
             if cv2.imread(str(saved_path)) is not None:
                 break
 
+    modality = "3D_CTPA" if lower_fn.endswith((".nii", ".nii.gz")) else "2D_XCA"
+    inf_start = time.perf_counter()
     try:
         pipeline = get_pipeline()
+        PIPELINE_READY.set(1)
         report = pipeline.predict_single_image(
             image_path=str(saved_path),
             save_xai_plots=True,
             output_dir=str(XAI_OUTPUT_DIR),
         )
+        DL_INFERENCE_DURATION_SECONDS.labels(model_name="StenoVision-Pipeline").observe(
+            time.perf_counter() - inf_start
+        )
+        PROCESSED_ANGIOGRAMS_TOTAL.labels(modality=modality).inc()
 
         # Formulate relative URL for XAI explanation visualization
         xai_url = None
@@ -181,6 +198,17 @@ def analyze_angiogram(file: UploadFile = File(...)):
         )
 
     except Exception as e:
+        if isinstance(e, FileNotFoundError):
+            PIPELINE_READY.set(0)
+        logger.exception(
+            f"[ANALYSIS] Deep learning inference failed for {orig_filename}: {e}",
+            extra={
+                "request_id": getattr(request.state, "request_id", None),
+                "method": request.method,
+                "path": str(request.url.path),
+                "status_code": 500,
+            },
+        )
         raise HTTPException(
             status_code=500,
             detail=f"Deep learning inference failed: {str(e)}",

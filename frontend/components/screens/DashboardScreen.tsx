@@ -245,7 +245,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ currentUser, o
         <SummaryCard
           title="Total Cases"
           value={AI_ANALYSIS_SUMMARY.totalCasesAnalyzed.toLocaleString()}
-          change="1,500 ARCADE + 14 Live"
+          change="1,500 ARCADE + 14 Uploaded"
           isPositive={true}
           icon={BarChart2}
           description="Attention U-Net & ResNet-18 Severity Network"
@@ -503,7 +503,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ currentUser, o
                 </div>
               </div>
             </div>
-            {renderRecentAnalysesTable('Recent Diagnostic Analyses Queue', 'Live patient scans queued for quantitative QCA morphometry and clinical sign-off')}
+            {renderRecentAnalysesTable('Recent Diagnostic Analyses Queue', 'Patient scans queued for quantitative QCA morphometry and clinical sign-off')}
           </div>
         ) : devPerspective === 'datascientist' ? (
           <div className="space-y-6">
@@ -905,7 +905,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ currentUser, o
             </div>
             <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg border border-[#A91121]/20">
               <span className="font-mono font-semibold text-slate-700">Next.js Web Workstation (:3000)</span>
-              <span className="font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200">Production Build</span>
+              <span className="font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200">Release v2.1</span>
             </div>
             <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg border border-[#A91121]/20">
               <span className="font-mono font-semibold text-slate-700">PostgreSQL / Local Relational DB</span>

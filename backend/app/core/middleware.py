@@ -18,31 +18,54 @@ from app.core.metrics import HTTP_REQUESTS_TOTAL, HTTP_REQUEST_DURATION_SECONDS
 logger = logging.getLogger("stenovision.access")
 
 
+def extract_client_ip(request: Request) -> str:
+    """Resolves real client IP behind Nginx reverse proxy headers."""
+    xff = request.headers.get("X-Forwarded-For", "").strip()
+    if xff:
+        return xff.split(",")[0].strip()
+    real_ip = request.headers.get("X-Real-IP", "").strip()
+    if real_ip:
+        return real_ip
+    return request.client.host if request.client else "unknown"
+
+
+def _extract_user_id_from_header(request: Request) -> int | None:
+    """Best-effort extraction of authenticated user_id from Bearer JWT for access logs."""
+    auth_header = request.headers.get("Authorization", "")
+    if not auth_header.startswith("Bearer "):
+        return None
+    token = auth_header[7:].strip()
+    if not token:
+        return None
+    try:
+        from app.core.security import decode_access_token
+        payload = decode_access_token(token)
+        return int(payload["sub"])
+    except Exception:
+        return None
+
+
+def _resolve_metric_endpoint(request: Request) -> str:
+    """Returns matched FastAPI route template or '/unmatched' to avoid 404 cardinality explosion."""
+    route = request.scope.get("route")
+    route_path = getattr(route, "path", None) if route is not None else None
+    return route_path if route_path else "/unmatched"
+
+
 class ObservabilityMiddleware(BaseHTTPMiddleware):
     """Correlates HTTP requests with unique IDs, Prometheus metrics, and structured logs."""
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         start_time = time.perf_counter()
 
-        # 1. Resolve or generate unique Request ID
+        # 1. Resolve or generate unique Request ID and real Client IP
         request_id = request.headers.get("X-Request-ID", str(uuid.uuid4()))
         request.state.request_id = request_id
 
-        # Normalize path for Prometheus endpoint grouping to avoid label cardinality explosion
         path = request.url.path
-        if "/cases/" in path and len(path.split("/")) > 4:
-            endpoint = "/api/v1/cases/{case_id}"
-        elif "/images/" in path and len(path.split("/")) > 4:
-            endpoint = "/api/v1/images/{image_id}"
-        elif "/reports/" in path and len(path.split("/")) > 4:
-            endpoint = "/api/v1/reports/{report_id}"
-        elif "/models/" in path and len(path.split("/")) > 4:
-            endpoint = "/api/v1/models/{model_id}"
-        else:
-            endpoint = path
-
         method = request.method
-        client_ip = request.client.host if request.client else "unknown"
+        client_ip = extract_client_ip(request)
+        user_id = _extract_user_id_from_header(request)
 
         # 2. Process Request
         try:
@@ -50,6 +73,7 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
             status_code = response.status_code
         except Exception as exc:
             duration = time.perf_counter() - start_time
+            endpoint = _resolve_metric_endpoint(request)
             HTTP_REQUESTS_TOTAL.labels(method=method, endpoint=endpoint, status_code=500).inc()
             HTTP_REQUEST_DURATION_SECONDS.labels(method=method, endpoint=endpoint).observe(duration)
             logger.error(
@@ -57,6 +81,7 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
                 extra={
                     "request_id": request_id,
                     "client_ip": client_ip,
+                    "user_id": user_id,
                     "method": method,
                     "path": path,
                     "status_code": 500,
@@ -69,9 +94,10 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
         # 3. Record Metrics and Execution Time
         duration = time.perf_counter() - start_time
         duration_ms = round(duration * 1000.0, 2)
+        endpoint = _resolve_metric_endpoint(request)
 
         # Do not track internal healthcheck polling in standard Prometheus to keep histograms clean
-        if endpoint not in ("/metrics", "/health"):
+        if path not in ("/metrics", "/health"):
             HTTP_REQUESTS_TOTAL.labels(
                 method=method, endpoint=endpoint, status_code=status_code
             ).inc()
@@ -90,6 +116,7 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
             extra={
                 "request_id": request_id,
                 "client_ip": client_ip,
+                "user_id": user_id,
                 "method": method,
                 "path": path,
                 "status_code": status_code,

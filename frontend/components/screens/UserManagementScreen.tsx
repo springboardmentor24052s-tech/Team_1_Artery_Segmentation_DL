@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { INITIAL_USERS, SystemUser } from '@/lib/mockData';
 import { UserRole, canManageUsers } from '@/lib/permissions';
+import { fetchUserAudit, LoginAuditEntry } from '@/lib/api';
 import { DataTable, Column } from '../DataTable';
 import { StatusIndicator } from '../StatusIndicator';
 import { UserAvatar } from '../UserAvatar';
-import { Users, UserPlus, Check, ArrowRight, X, ShieldCheck } from 'lucide-react';
+import { Users, UserPlus, Check, ArrowRight, X, ShieldCheck, RefreshCw, History } from 'lucide-react';
 
 interface UserManagementScreenProps {
   onNavigate: (screen: string) => void;
@@ -23,6 +24,42 @@ export const UserManagementScreen: React.FC<UserManagementScreenProps> = ({
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newRole, setNewRole] = useState<UserRole>('Data Scientist');
+  const [auditLogs, setAuditLogs] = useState<LoginAuditEntry[]>([]);
+  const [totalAuditEvents, setTotalAuditEvents] = useState<number>(0);
+  const [auditLoading, setAuditLoading] = useState<boolean>(false);
+
+  const canViewAudit = canManageUsers(currentUser?.role);
+
+  const loadAuditData = async () => {
+    if (!canViewAudit) return;
+    setAuditLoading(true);
+    const data = await fetchUserAudit(100);
+    if (data) {
+      setAuditLogs(data.recent_logins);
+      setTotalAuditEvents(data.total_events);
+      const lastLoginByEmail = new Map<string, string>();
+      for (const u of data.active_users) {
+        if (u.last_login_at) {
+          lastLoginByEmail.set(
+            u.email.toLowerCase(),
+            new Date(u.last_login_at).toLocaleString()
+          );
+        }
+      }
+      setUsers((prev) =>
+        prev.map((u) => {
+          const liveTime = lastLoginByEmail.get(u.email.toLowerCase());
+          return liveTime ? { ...u, lastActive: liveTime } : u;
+        })
+      );
+    }
+    setAuditLoading(false);
+  };
+
+  useEffect(() => {
+    loadAuditData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser?.role]);
 
   const handleAddUser = (e: React.FormEvent) => {
     e.preventDefault();
@@ -256,6 +293,99 @@ export const UserManagementScreen: React.FC<UserManagementScreenProps> = ({
         columns={columns}
         keyExtractor={(row) => row.id}
       />
+
+      {/* All-Users Login Audit Log (Administrator & Developer) */}
+      {canViewAudit && (
+        <div className="space-y-3 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-lg bg-red-50 text-[#A91121]">
+                <History className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-[#252525]">
+                  User Login Audit Log (All Users)
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Recorded authentication attempts across all roles ({totalAuditEvents} total events)
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={loadAuditData}
+              disabled={auditLoading}
+              className="px-3 py-1.5 text-xs font-semibold text-[#252525] bg-white hover:bg-slate-50 border border-slate-300 rounded-lg inline-flex items-center gap-1.5 self-start sm:self-auto cursor-pointer disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${auditLoading ? 'animate-spin' : ''}`} />
+              Refresh Audit Log
+            </button>
+          </div>
+
+          {auditLogs.length === 0 ? (
+            <div className="bg-white border border-slate-200 rounded-xl p-6 text-center text-xs text-slate-500">
+              {auditLoading
+                ? 'Loading audit log entries...'
+                : 'No login audit entries recorded yet, or sign in with an Administrator / Developer account to view backend logs.'}
+            </div>
+          ) : (
+            <DataTable
+              data={auditLogs}
+              columns={[
+                {
+                  header: 'USER',
+                  accessorKey: (row) => (
+                    <div>
+                      <div className="font-semibold text-xs text-[#252525]">
+                        {row.full_name || 'Unregistered / Unknown'}
+                      </div>
+                      <div className="text-[11px] font-mono text-slate-500">
+                        {row.attempted_email_masked}
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  header: 'ROLE',
+                  accessorKey: (row) => (
+                    <span className={`font-mono text-[11px] font-medium px-2 py-0.5 rounded border ${getRoleBadgeStyle(row.user_role)}`}>
+                      {row.user_role}
+                    </span>
+                  ),
+                },
+                {
+                  header: 'OUTCOME',
+                  accessorKey: (row) => (
+                    <span
+                      className={`font-mono text-[11px] font-semibold px-2 py-0.5 rounded border ${
+                        row.outcome === 'success'
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                          : 'bg-red-50 text-red-700 border-red-200'
+                      }`}
+                    >
+                      {row.outcome}
+                    </span>
+                  ),
+                },
+                {
+                  header: 'CLIENT IP',
+                  accessorKey: 'client_ip',
+                  className: 'font-mono text-xs text-slate-600',
+                },
+                {
+                  header: 'TIMESTAMP',
+                  accessorKey: (row) => (
+                    <span className="font-mono text-[11px] text-slate-500">
+                      {new Date(row.created_at).toLocaleString()}
+                    </span>
+                  ),
+                },
+              ]}
+              keyExtractor={(row) => String(row.id)}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };

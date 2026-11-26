@@ -64,6 +64,8 @@ def _migrate_columns() -> None:
                 conn.execute(text("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT TRUE"))
             if "department" not in user_cols:
                 conn.execute(text("ALTER TABLE users ADD COLUMN department VARCHAR(100) DEFAULT 'Cardiovascular Research'"))
+            if "last_login_at" not in user_cols:
+                conn.execute(text("ALTER TABLE users ADD COLUMN last_login_at TIMESTAMP WITH TIME ZONE"))
             # Migrate legacy roles to official platform display roles
             conn.execute(text("UPDATE users SET role = 'Radiologist / Clinician' WHERE role IN ('SENIOR_RADIOLOGIST', 'radiologist', 'senior_radiologist', 'RADIOLOGIST_CLINICIAN')"))
             conn.execute(text("UPDATE users SET role = 'Medical Researcher' WHERE role IN ('PRINCIPAL_INVESTIGATOR', 'principal_investigator', 'MEDICAL_RESEARCHER')"))
